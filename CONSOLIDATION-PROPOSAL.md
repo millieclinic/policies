@@ -2,10 +2,16 @@
 title: "Policy Consolidation Proposal"
 last_reviewed: 2026-05-24
 owner: "Privacy Officer + Security Officer (joint)"
-status: "DRAFT — pending approval"
+status: "EXECUTED — see POLICY-VS-QUESTIONNAIRE-MAPPING.md for current state"
 ---
 
-# Policy Consolidation Proposal
+> **Status: this proposal was executed on 2026-05-24.** The 24 single-topic files are now in [`New Policy Docs/_archive/`](New%20Policy%20Docs/_archive/). The 10 thematic policies, plus the 3 unchanged reference files (`hipaa-definitions.md`, `platform-and-access-matrix.md`, `sdlc-and-asset-lifecycle.md` — the SDLC was extended rather than archived), are at the top level of `New Policy Docs/`. The user later opted for **13 active files** by splitting AI governance into its own file. The COVID-19 clinical protocol (`Policy Docs/Millie Clinic COVID Policy.docx`) was integrated as [operational-safeguards.md §A.9](New%20Policy%20Docs/operational-safeguards.md). The current authoritative coverage matrix is [`POLICY-VS-QUESTIONNAIRE-MAPPING.md`](POLICY-VS-QUESTIONNAIRE-MAPPING.md) — that file supersedes the analysis below for day-to-day reference; keep this proposal for the rationale behind structural decisions.
+>
+> Outstanding items (see [TODO.md](TODO.md)): patient-facing Notice of Privacy Practices still missing; COVID staff-guidance "To Do…" still incomplete; `Policy Docs/AWS and Aptible Security Incident Management Policy.docx` was not integrated during the May 2026 pass.
+
+---
+
+# Policy Consolidation Proposal (original)
 
 Reducing the 24 Markdown files in `New Policy Docs/` to a recommended **6 thematic policy documents** (plus 2 read-only reference matrices and 1 patient-facing notice that still needs to be written from scratch).
 
@@ -672,3 +678,153 @@ These are real holes that consolidation surfaces but does not fix — list them 
 | sdlc-and-asset-lifecycle.md | unchanged |
 | platform-and-access-matrix.md | unchanged |
 | ech-security-assessment.md | unchanged |
+
+---
+
+## §7 — Revisions based on ECH/SIG questionnaire mapping
+
+Cross-reference: `POLICY-VS-QUESTIONNAIRE-MAPPING.md`. The 182-row ECH Security Assessment surfaces real-world auditor expectations that the existing 24 files only partially address. This section recommends adjustments to §3's proposed structure.
+
+### 7.1 Proposed structure changes
+
+The existing 10-file structure in §3 (governance, phi-use, patient-rights, technical-safeguards, operational-safeguards, incident-and-breach, vendor-and-BAs, sdlc-and-asset, two matrices) **still works as a baseline** for HIPAA compliance — but the ECH/SIG mapping exposes 5 topics that don't fit cleanly into any proposed bucket. Recommendation: **add 2 new consolidated files and absorb the rest as sections in existing proposed files**.
+
+**Add as new standalone files:**
+
+1. **`acceptable-use-and-byod.md`** (NEW). Rationale: SIG D.2 explicitly asks for a management-approved Acceptable Use Policy with an owner and review cadence — auditors look for it by name. The current `hipaa-workstation-use.md` is workstation-only and doesn't cover internet/email/social-media/personal-use. Combining AUP + BYOD/MDM in one document also resolves the **Critical** MDM/BYOD gaps (rows 132, 133, 134 of the CSV — all NO/YES + FOLLOW UP) without inflating `technical-safeguards.md`. Owner: Security Officer. Estimated size: 8–12 KB.
+   - Outline: Acceptable use (internet, email, social media, AI tools, personal use, prohibited activities) · BYOD eligibility & registration · MDM enrollment requirements · Personal-vs-company-data separation · Lost/stolen device protocol · Offboarding wipe · Sanctions reference.
+   - **Justifies splitting from `technical-safeguards.md`** because the AUP audience is "every employee" while technical-safeguards is "the engineering team."
+
+2. **`network-and-cloud-security.md`** (NEW). Rationale: SIG N.1–N.12 plus the entire AWS Questionnaire (rows 2–33) repeatedly ask for documented network security & cloud configuration standards. Millie's cloud-native posture means many controls are inherited from Aptible/AWS — but there's no written policy that states this. A short document codifies the AWS Questionnaire answers and the AWS-specific incident response, and consolidates wireless (N.9) and network-baseline (N.11, N.12) into one place. Owner: Security Officer / CTO joint. Estimated size: 8–10 KB.
+   - Outline: Network architecture (Aptible/AWS/Cloudflare) · IAM/SSO standard · S3 public-access posture · Secrets management · Key rotation cadence · VPC/subnet design · Wireless policy (office WiFi, guest WiFi) · Network device patching · DMZ statement (cloud-native, N/A in traditional sense) · NIDS/NIPS (GuardDuty stance) · DR test cadence for cloud workloads · AWS-specific incident response procedures.
+
+**Do NOT split from existing proposed files** (the current proposed file still works, but content gets added):
+- AI governance: a 2-page section inside `acceptable-use-and-byod.md` is enough for now (covers SIG R.1/R.2/R.4/R.5). Splitting AI into its own file would be over-engineering at Millie's scale.
+- Records retention: section inside `governance-and-risk-management.md`. No need for a standalone retention policy.
+- Change management: section inside `sdlc-and-asset-lifecycle.md` (CTO-owned anyway).
+- Pandemic plan: appendix to `operational-safeguards.md` §5 Contingency Planning.
+- C-SCRM: section inside `vendor-and-business-associates.md`.
+- HR security / sanctions: section inside `governance-and-risk-management.md` plus a single consolidated sanctions clause per CONSOLIDATION §5c.
+- Pentest & audit assurance: a half-page "Assurance Program" section inside `governance-and-risk-management.md` plus an `assurance/` folder for actual reports.
+- Patient-facing NPP: still TBD per §3.10 (Scenario B).
+
+**Revised final count: 12 files** (was 10):
+- 7 thematic policies + `sdlc-and-asset-lifecycle.md` + 2 reference matrices + 1 glossary + 1 TODO NPP = 12.
+  - governance-and-risk-management.md
+  - phi-use-and-disclosure.md
+  - patient-rights.md
+  - technical-safeguards.md
+  - operational-safeguards.md
+  - incident-and-breach-response.md
+  - vendor-and-business-associates.md
+  - **acceptable-use-and-byod.md** ← new
+  - **network-and-cloud-security.md** ← new
+  - sdlc-and-asset-lifecycle.md
+  - hipaa-definitions.md
+  - platform-and-access-matrix.md + ech-security-assessment.md (matrices)
+
+### 7.2 Content to add to existing proposed merges
+
+Concrete additions, in priority order (Critical items from §2 of the mapping doc first):
+
+**To `acceptable-use-and-byod.md` (NEW file)**:
+- **MDM section** — full clause. Address rows 132, 133, 134 directly. Required enrollment for any device touching PHI; OS minimums; remote-wipe capability; consent form.
+- **AI Use clause** — full clause. Approved tools allowlist; prohibition on submitting PHI/PII to public LLMs; AI inventory pointer (where the list lives); periodic review. Addresses SIG R.1/R.2/R.5 at minimum viable level.
+- **Acceptable use** — full clause. Internet, email, social media, personal use, prohibited activities, sanctions reference.
+
+**To `technical-safeguards.md`**:
+- **Session & token management** subsection in §2 (Access control). Addresses OWASP A07 (row 78, FOLLOW UP, Remediate=Yes). Cover: session expiration, token rotation, refresh-token handling, logout-on-password-change.
+- **Password storage / app secret hashing standard** in §3 (Encryption). Addresses OWASP A02 (row 73, FOLLOW UP, Remediate=Yes). Specify hash algorithm (argon2id or bcrypt), salt, iterations; secret-rotation policy.
+- **Default-password change requirement** explicit in §2. Addresses SIG N.12 (row 145).
+- **Logging/alerting cadence** in a new §8 "Logging & Monitoring." Addresses OWASP A09 (row 80, FOLLOW UP) and SIG J.5 (row 113). Log review cadence, alert thresholds, retention (logs already covered for retention in Framework §9).
+
+**To `network-and-cloud-security.md` (NEW file)**:
+- All AWS Questionnaire policy-relevant items (rows 2–33).
+- SIG N.1, N.2, N.3, N.4, N.7, N.8, N.11, N.12 (rows 136–145).
+- Wireless policy section (row 143, N.9).
+- Hardening baseline reference (row 76, OWASP A05).
+- Patch management SLA for network devices (row 77, OWASP A06, FOLLOW UP, Remediate=Yes).
+- SSRF defenses (row 81, OWASP A10, FOLLOW UP). Outbound URL allowlisting, blocking AWS metadata endpoint from app subnets.
+
+**To `operational-safeguards.md` §5 (Contingency Planning)**:
+- **Pandemic / infectious disease appendix** — full clause (~1 page). Addresses row 119 (K.4, NO + FOLLOW UP). Remote-work activation, staff health protocols, supply continuity.
+- **DR testing program** subsection — placeholder + cadence. Addresses row 117 (K.2, FOLLOW UP). State annual cadence and last-test date placeholder.
+- **Multi-vendor resiliency / single-vendor risk acceptance** — full clause. Addresses row 124 (K.30, NO + FOLLOW UP). Inventory Aptible/AWS/Cloudflare dependencies; document risk acceptance + monitoring + exit considerations.
+
+**To `governance-and-risk-management.md`**:
+- **Records Retention schedule** — full table. Addresses SIG D.3 / K.11 (rows 99, 123). Retention by record type: PHI (lifetime + 6yr per HIPAA), audit logs (6mo hot + S3 archive per Framework §9), email (TBD), HR records (per state law), financial records (7yr).
+- **Enterprise Risk Management framing** — short clause expanding HIPAA risk-mgmt to broader operational/strategic risk. Addresses SIG A.1 (row 92).
+- **HR security policy pointer + sanctions clause** — placeholder + consolidated sanctions clause per CONSOLIDATION §5c. Addresses SIG E.1 (row 100) at minimum viable level until full HR policy authored.
+- **Assurance Program section** — short clause referencing pentest cadence, SOC2/HITRUST stance, internal audit. Addresses rows 182, 183 + Insurance row 181. Point to an `assurance/` folder for actual reports.
+- **Compliance & ethics / fraud prevention pointer** — minimal clause naming the Code of Conduct + whistleblower channel locations. Addresses SIG L.4 / L.6 (rows 128, 130).
+- **Sanctions clause** (also per CONSOLIDATION §5c) closes the disciplinary-action gap and satisfies 45 CFR §164.530(e) at one location.
+
+**To `vendor-and-business-associates.md`**:
+- **C-SCRM section** — short clause expanding existing vendor risk to explicit supply-chain language for software dependencies, OSS, container base images, SaaS subprocessors. Addresses SIG S.32 / S.57 / S.61 / S.80 / S.100 (rows 176–180).
+- **Nth-party flow-down language** — already covered in `information-security-framework.md` §11 (mark Full per mapping §1.5); migrate verbatim.
+
+**To `sdlc-and-asset-lifecycle.md`**:
+- **Change Management** subsection — full clause. Addresses SIG G.2 (row 104). Approval, testing, rollback, emergency change exception.
+- **Patch management SLA** — concrete cadence (e.g., Critical = 7 days, High = 30 days). Addresses OWASP A06 / SIG N.4 (rows 77, 139).
+- **Code integrity / signed artifacts** — short clause. Addresses OWASP A08 (row 79).
+- **Secure coding standard pointer** — minimal clause naming approved guidance (OWASP ASVS or similar). Addresses OWASP A03/A04/A10 (rows 74, 75, 81).
+- **Fix the header bug** — file currently mis-titled "Security Incident Management Policy / IT-026" (also collides with Framework's IT-026).
+
+**To `incident-and-breach-response.md`**:
+- **Tamper-evident incident log** clause. Addresses SIG J.14 (row 115). Currently §III(c) requires a log but not tamper protection.
+- **MSSP / outsourced IR statement** — short clause stating whether IR is outsourced (currently No). Addresses SIG J.11 (row 114).
+- **AWS-specific incident playbook** pointer to `network-and-cloud-security.md`. Addresses AWS Proc.3 (row 31).
+
+### 7.3 Content to remove or simplify (drives §3 cruft list of mapping doc)
+
+When consolidating, **shorten or cut** the following because no ECH/SIG item asks for them:
+
+- **PHI use-and-disclosure exhibits** for law enforcement, military, national security, correctional institutions, organ donation, workers' comp, coroners, funeral directors. Collapse 8 sections (~130 lines in `hipaa-phi-use-and-disclosure.md`) into a single "Disclosures permitted under 45 CFR §164.512 require CPO approval" paragraph. Keep public-health (relevant to women's-health practice) and threat-to-safety (clinically relevant) inline. Net cut: ~130 lines from `phi-use-and-disclosure.md`.
+- **Off-site shredding vendor selection process** in `hipaa-paper-documents.md` §III(c)(iv). Cut to one sentence. Net cut: ~15 lines.
+- **Foreign-country encryption export controls** in `hipaa-encryption.md` §III(c)(iii). Cut entirely; not in Millie's threat model. Net cut: ~5 lines.
+- **Per-page paper-copy fee supply itemization** in `hipaa-right-to-access.md` §III(a)(vii). Keep flat-fee statement + "no patient denied for inability to pay." Cut supply-cost detail. Net cut: ~10 lines.
+- **Breach notification fill-in-the-blank paper forms** (Exhibits B, C, D in `hipaa-breach-notification.md`). Move to a `forms/` folder or convert to "use template at Google Workspace > Compliance > Breach Forms." Net cut: ~100 lines from `incident-and-breach-response.md`.
+- **Information Blocking Compliance Policy cross-references** in `hipaa-right-to-access.md` (per CONSOLIDATION §1.13). Inline the EHI definition; drop the cross-references. Net cut: ~5 lines.
+- **Privacy-policy.md base64 image placeholders and page-footer artifacts** (already part of cleanup plan).
+
+Total reduction: ~265 lines of cruft removed alongside ~3 new policy files / sections added. Net document length holds roughly steady while coverage breadth increases.
+
+### 7.4 New policy files needed (summary)
+
+| New file | Drives which gaps | Severity if absent | Owner | Est. size |
+|---|---|---|---|---|
+| `acceptable-use-and-byod.md` | MDM (row 132, **Critical**), BYOD (rows 133, 134, **Critical**), AUP (row 98, **High**), AI policy (rows 171–174, **High**) | Critical | Security Officer | 8–12 KB |
+| `network-and-cloud-security.md` | All AWS Q (rows 2–33), SIG N.1–N.12 (rows 136–145, **High**), Wireless (**Medium**), Hardening (**High**), SSRF (**Critical**) | High–Critical | Security Officer + CTO | 8–10 KB |
+
+Items NOT requiring a new file (absorbed into existing proposed files per §7.2):
+- Records retention → `governance-and-risk-management.md`
+- ERM → `governance-and-risk-management.md`
+- HR security pointer → `governance-and-risk-management.md`
+- Assurance / pentest program → `governance-and-risk-management.md`
+- Compliance & ethics pointer → `governance-and-risk-management.md`
+- Pandemic plan → `operational-safeguards.md` §5
+- DR testing cadence → `operational-safeguards.md` §5
+- Multi-vendor resiliency → `operational-safeguards.md` §5
+- Change Management → `sdlc-and-asset-lifecycle.md`
+- Patch SLA → `sdlc-and-asset-lifecycle.md`
+- Secure coding pointer → `sdlc-and-asset-lifecycle.md`
+- C-SCRM → `vendor-and-business-associates.md`
+- Session/token mgmt → `technical-safeguards.md`
+- Password storage standard → `technical-safeguards.md`
+- Logging/alerting cadence → `technical-safeguards.md`
+- Tamper-evident incident log → `incident-and-breach-response.md`
+
+Items intentionally NOT addressed (out of scope or low priority):
+- PCI DSS (rows 82–91) — answer "Out of scope per SAQ-A" if payments outsourced.
+- ESG / DEI / modern slavery (rows 146–159) — out of scope for HIPAA repo; can be answered as "Not formally documented."
+- IoMT (row 64), Antitrust (row 127) — N/A for Millie.
+- Patient-facing NPP — already TBD per §3.10.
+
+### 7.5 Revised migration ordering
+
+Insert two steps before §6 Step 2:
+
+- **Step 1a — Stand up the 2 new files first** (in skeleton form) so that consolidations can cross-reference them. `acceptable-use-and-byod.md` and `network-and-cloud-security.md` can start as 1-page outlines populated from the CSV answers; flesh out after the merge PRs.
+- **Step 1b — Address the 12 FOLLOW UP / Remediate items in `POLICY-VS-QUESTIONNAIRE-MAPPING.md` §4** in parallel. Some are policy edits (sessions, password storage); some are operational fixes (GitHub upgrade). They should ship before ECH submission, not before consolidation, but the policy versions of each should land in the new files.
+
+The rest of §6's ordering (Step 2 creates the thematic files, Step 3 deletes old single-topic files, Step 4 updates README) is unchanged — just operate on 12 final files instead of 10.

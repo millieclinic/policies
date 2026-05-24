@@ -8,9 +8,13 @@ owner: "Privacy Officer + Security Officer (joint)"
 
 This repository is the source of truth for Millie's HIPAA and information security policies.
 
-- **`New Policy Docs/`** — current canonical policies in Markdown. Edit these.
-- **`Policy Docs/`** — historical archive of the original `.docx` / `.pdf` / `.xlsx` source files. Do not edit.
-- **This README** — the operating playbook: policy index, compliance calendar, and responsibility matrix. Reviewed by the **Privacy Officer** and **Security Officer** at the start of each quarter.
+- **`New Policy Docs/`** — current canonical policies in Markdown. Edit these. 10 thematic policies + 3 reference files + 1 TODO + 1 `forms/` subfolder.
+- **`New Policy Docs/_archive/`** — the 20 single-topic policy files from the May 2026 consolidation. Historical reference only; don't edit.
+- **`Policy Docs/`** — original `.docx` / `.pdf` / `.xlsx` source files from the pre-Markdown era. Don't edit.
+- **`ECH Security Assessment Questions - Questions.csv`** — third-party vendor questionnaire Millie completes (AWS / ISD / OWASP / PCI / SIG Lite / Insurance / Security Audits).
+- **`CONSOLIDATION-PROPOSAL.md`** + **`POLICY-VS-QUESTIONNAIRE-MAPPING.md`** — working documents that drove the consolidation; useful for understanding why files are structured as they are.
+- **`TODO.md`** — outstanding compliance action items surfaced by the ECH assessment.
+- **This README** — operating playbook: policy index, compliance calendar, and responsibility matrix. Reviewed by the **Privacy Officer** and **Security Officer** at the start of each quarter.
 
 **How to use this document:**
 
@@ -24,34 +28,27 @@ Owner names are listed by **role** (Privacy Officer, Security Officer, CTO, CEO,
 
 ## §1 — Policy Index
 
-All policies live as Markdown files in `New Policy Docs/`. Original `.docx` / `.pdf` source files are preserved in `Policy Docs/` for the historical record. Templates (BAA, Insurance Authorization) and training decks were intentionally not migrated; they remain in `Policy Docs/`.
+10 thematic policies + 3 reference files. Active files live at the top level of `New Policy Docs/`; older single-topic files are in `New Policy Docs/_archive/` for historical reference.
 
 | Policy | Purpose | Owner |
 |---|---|---|
-| [information-security-framework.md](New Policy Docs/information-security-framework.md) | Master security and data-governance framework. Anchors all other policies; covers governance, data classification, access control, encryption, logging, incident response, retention, BCP, vendor management. | Security Officer |
-| [privacy-policy.md](New Policy Docs/privacy-policy.md) | Patient-facing privacy notice describing how Millie collects, uses, and discloses personal information. | Privacy Officer |
-| [sdlc-and-asset-lifecycle.md](New Policy Docs/sdlc-and-asset-lifecycle.md) | System Development Lifecycle and IT asset lifecycle controls — secure design, deployment, maintenance, retirement. | CTO |
-| [hipaa-accounting-of-disclosures.md](New Policy Docs/hipaa-accounting-of-disclosures.md) | Procedure for tracking and responding to patient requests for an accounting of PHI disclosures. | Privacy Officer |
-| [hipaa-breach-notification.md](New Policy Docs/hipaa-breach-notification.md) | Breach detection, internal reporting, and notification to patients / HHS / state regulators. | Privacy Officer |
-| [hipaa-business-associate-agreement.md](New Policy Docs/hipaa-business-associate-agreement.md) | Requirements for identifying Business Associates and executing BAAs before granting PHI access. | Privacy Officer |
-| [hipaa-contingency-planning.md](New Policy Docs/hipaa-contingency-planning.md) | Backup, disaster recovery, and emergency operations procedures. | Security Officer |
-| [hipaa-de-identifying-phi.md](New Policy Docs/hipaa-de-identifying-phi.md) | Approved methods for de-identifying PHI and creating Limited Data Sets. | Privacy Officer |
-| [hipaa-definitions.md](New Policy Docs/hipaa-definitions.md) | Glossary of HIPAA terms used across the rest of the policy suite. | Privacy Officer |
-| [hipaa-encryption.md](New Policy Docs/hipaa-encryption.md) | Encryption standards for PHI at rest and in transit, plus key management. | Security Officer |
-| [hipaa-marketing.md](New Policy Docs/hipaa-marketing.md) | When patient communications count as Marketing and when authorization is required. | Privacy Officer |
-| [hipaa-minimum-necessary.md](New Policy Docs/hipaa-minimum-necessary.md) | Limiting PHI use, disclosure, and request to the minimum necessary for the task. | Privacy Officer |
-| [hipaa-paper-documents.md](New Policy Docs/hipaa-paper-documents.md) | Physical handling, storage, and destruction of paper PHI. | Security Officer |
-| [hipaa-passwords.md](New Policy Docs/hipaa-passwords.md) | Password complexity, rotation, lockout, and deactivation upon termination. | Security Officer |
-| [hipaa-phi-use-and-disclosure.md](New Policy Docs/hipaa-phi-use-and-disclosure.md) | Permitted uses and disclosures of PHI for legal, public health, and regulatory purposes. | Privacy Officer |
-| [hipaa-remote-access.md](New Policy Docs/hipaa-remote-access.md) | VPN, MFA, and controls for accessing the IT System from outside the office. | Security Officer |
-| [hipaa-right-to-access.md](New Policy Docs/hipaa-right-to-access.md) | Patient right to inspect and obtain copies of their own PHI. 30-day response window. | Privacy Officer |
-| [hipaa-right-to-amend.md](New Policy Docs/hipaa-right-to-amend.md) | Patient right to request amendment of their PHI. 60-day response window. | Privacy Officer |
-| [hipaa-risk-management.md](New Policy Docs/hipaa-risk-management.md) | Annual security risk assessment, risk mitigation, and reporting to the Risk Review Committee. | Security Officer |
-| [hipaa-safeguards.md](New Policy Docs/hipaa-safeguards.md) | Administrative, physical, and technical safeguards required by the HIPAA Security Rule. | Security Officer |
-| [hipaa-security-incidents.md](New Policy Docs/hipaa-security-incidents.md) | Detection, investigation, escalation, and annual reporting of security incidents. | Security Officer |
-| [hipaa-workstation-use.md](New Policy Docs/hipaa-workstation-use.md) | Acceptable use of workstations (including iPads and personal mobile devices) accessing the IT System. | Security Officer |
-| [platform-and-access-matrix.md](New Policy Docs/platform-and-access-matrix.md) | Inventory of every platform / SaaS subscription, who has access, and BAA status. | Security Officer |
-| [ech-security-assessment.md](New Policy Docs/ech-security-assessment.md) | Standard security-assessment questions used when evaluating new health-tech vendors. | Security Officer |
+| [governance-and-risk-management.md](New%20Policy%20Docs/governance-and-risk-management.md) | Master security & data-governance framework, annual risk assessment, ERM, records retention, HR/sanctions anchor, assurance program. The landing policy. | Security Officer + Privacy Officer |
+| [phi-use-and-disclosure.md](New%20Policy%20Docs/phi-use-and-disclosure.md) | Minimum Necessary Rule, permitted PHI uses & disclosures, de-identification (Safe Harbor), Limited Data Sets, Marketing & Patient Communications. | Privacy Officer |
+| [patient-rights.md](New%20Policy%20Docs/patient-rights.md) | Patient rights to access (30-day), amendment (60-day), and accounting of disclosures (6-year window). | Privacy Officer |
+| [technical-safeguards.md](New%20Policy%20Docs/technical-safeguards.md) | Access control, MFA, password storage, encryption (FIPS 140-2 / NIST SP 800-111), workstation use, remote access, device & media management, session/token, logging cadence. | Security Officer + CTO |
+| [operational-safeguards.md](New%20Policy%20Docs/operational-safeguards.md) | Admin & physical safeguards (oral/fax/email/text/voicemail), paper documents, contingency planning, DR testing, pandemic plan, multi-vendor resiliency. | Security Officer |
+| [incident-and-breach-response.md](New%20Policy%20Docs/incident-and-breach-response.md) | Security incident detection (24h Security Officer investigation), tamper-evident log, breach determination (48h internal report), patient/HHS notification (60-day rule). | Security Officer + Privacy Officer |
+| [vendor-and-business-associates.md](New%20Policy%20Docs/vendor-and-business-associates.md) | Vendor risk management, BAA identification & execution, subcontractor/Nth-party flow-down, Cybersecurity Supply Chain Risk Management (C-SCRM). | Privacy Officer |
+| [acceptable-use-and-byod.md](New%20Policy%20Docs/acceptable-use-and-byod.md) | Acceptable use, BYOD eligibility & registration, Mobile Device Management (MDM) enrollment, lost/stolen device protocol, offboarding wipe. | Security Officer |
+| [network-and-cloud-security.md](New%20Policy%20Docs/network-and-cloud-security.md) | Network architecture (Aptible/AWS/Cloudflare), IAM & SSO posture, secrets management, VPC/subnet design, wireless, S3 posture, GuardDuty/Detection, IaC, AWS-specific IR. | Security Officer + CTO |
+| [ai-and-ml-governance.md](New%20Policy%20Docs/ai-and-ml-governance.md) | AI tool approval & inventory, prohibited use of public LLMs with PHI, clinical AI validation, engineering AI guardrails, patient transparency. | Security Officer + CTO + Privacy Officer |
+| [sdlc-and-asset-lifecycle.md](New%20Policy%20Docs/sdlc-and-asset-lifecycle.md) | Secure SDLC, change management, patch SLA (7d Critical / 30d High), code integrity, secure coding standards (OWASP ASVS). | CTO + Security Officer |
+| [hipaa-definitions.md](New%20Policy%20Docs/hipaa-definitions.md) | Glossary of HIPAA terms (PHI, ePHI, Business Associate, Designated Record Set, etc.) referenced by all other policies. | Privacy Officer |
+| [platform-and-access-matrix.md](New%20Policy%20Docs/platform-and-access-matrix.md) | Inventory of every platform / SaaS subscription, who has access, BAA status. The xlsx in `Policy Docs/` is the easier editable source. | Security Officer |
+
+**Plus 1 TODO** — [PATIENT-NOTICE-TODO.md](New%20Policy%20Docs/PATIENT-NOTICE-TODO.md): a patient-facing Notice of Privacy Practices is missing from this repo and needs to be authored (45 CFR §164.520).
+
+**Plus 1 `forms/` subfolder** — fillable templates extracted from the old breach notification policy: individual notification letter, media notification (≥500 residents), HHS breach report.
 
 ---
 
@@ -63,52 +60,56 @@ Each row: **Task · Source policy · Owner · Notes / target window.** Use this 
 
 | Task | Source | Owner |
 |---|---|---|
-| Conduct full HIPAA security risk assessment; document threats, vulnerabilities, likelihood, impact; produce mitigation plan; present to Risk Review Committee (and Board if material risks). | [hipaa-risk-management.md](New Policy Docs/hipaa-risk-management.md) | Security Officer |
-| Review and refresh every policy in this folder; update `last_reviewed:` in frontmatter; re-sign if required. | All policies | Privacy Officer + Security Officer |
-| Workforce HIPAA training refresh for all personnel (initial training is on hire — see Event-driven section). | [hipaa-safeguards.md](New Policy Docs/hipaa-safeguards.md) | Privacy Officer |
-| Prepare annual privacy & security report and submit to the CEO. | [hipaa-security-incidents.md](New Policy Docs/hipaa-security-incidents.md) | Security Officer + Privacy Officer |
-| Test the contingency plan end-to-end (failover, restoration, emergency operations) and document results. | [hipaa-contingency-planning.md](New Policy Docs/hipaa-contingency-planning.md) | Security Officer |
-| Review every active Business Associate Agreement: confirm vendor is still in scope, renewal date current, subcontractor list accurate. | [hipaa-business-associate-agreement.md](New Policy Docs/hipaa-business-associate-agreement.md) | Privacy Officer |
-| Refresh the platform & access matrix end-to-end: confirm every listed app is still in use, every role's access is still correct, every BAA-required vendor still has one signed. | [platform-and-access-matrix.md](New Policy Docs/platform-and-access-matrix.md) | Security Officer |
+| Conduct full HIPAA security risk assessment; document threats, vulnerabilities, likelihood, impact; produce mitigation plan; present to Risk Review Committee (and Board if material). | [governance-and-risk-management.md](New%20Policy%20Docs/governance-and-risk-management.md) §4 | Security Officer |
+| Review and refresh every policy in `New Policy Docs/`; update `last_reviewed:` frontmatter; re-sign. | All policies | Privacy Officer + Security Officer |
+| Workforce HIPAA training refresh for all personnel. | [governance-and-risk-management.md](New%20Policy%20Docs/governance-and-risk-management.md) §IV | Privacy Officer |
+| Prepare annual privacy & security report and submit to the CEO. | [incident-and-breach-response.md](New%20Policy%20Docs/incident-and-breach-response.md) | Security Officer + Privacy Officer |
+| Test the contingency plan end-to-end (failover, restoration, emergency operations) and document results. | [operational-safeguards.md](New%20Policy%20Docs/operational-safeguards.md) §4 | Security Officer |
+| Review every active Business Associate Agreement: vendor still in scope, renewal date current, subcontractor list accurate. | [vendor-and-business-associates.md](New%20Policy%20Docs/vendor-and-business-associates.md) | Privacy Officer |
+| Refresh the platform & access matrix end-to-end: every listed app still in use, every role's access still correct, every BAA-required vendor still has one signed. | [platform-and-access-matrix.md](New%20Policy%20Docs/platform-and-access-matrix.md) | Security Officer |
+| External penetration test or equivalent assurance activity. | [governance-and-risk-management.md](New%20Policy%20Docs/governance-and-risk-management.md) §8 Assurance | Security Officer |
+| Deeper AI inventory review including bias / fairness assessment for clinical AI. | [ai-and-ml-governance.md](New%20Policy%20Docs/ai-and-ml-governance.md) §3(e) | Security Officer + clinical lead |
 
 ### Quarterly
 
 | Task | Source | Owner |
 |---|---|---|
-| Review backup procedure documentation and update if procedures or vendors have changed. | [hipaa-contingency-planning.md](New Policy Docs/hipaa-contingency-planning.md) | Security Officer |
-| User access review: walk the platform matrix, confirm every account is still needed; revoke stale access. | [hipaa-minimum-necessary.md](New Policy Docs/hipaa-minimum-necessary.md), [platform-and-access-matrix.md](New Policy Docs/platform-and-access-matrix.md) | Security Officer |
-| Vulnerability scan / patch review across infrastructure and endpoints. | [hipaa-safeguards.md](New Policy Docs/hipaa-safeguards.md) | Security Officer + CTO |
-| Tabletop drill of an incident-response scenario (e.g., ransomware, lost laptop, phishing). Document findings. | [hipaa-security-incidents.md](New Policy Docs/hipaa-security-incidents.md) | Security Officer |
+| Review backup procedure documentation and update if procedures or vendors have changed. | [operational-safeguards.md](New%20Policy%20Docs/operational-safeguards.md) §4 | Security Officer |
+| User access review: walk the platform matrix, confirm every account is still needed; revoke stale access. | [governance-and-risk-management.md](New%20Policy%20Docs/governance-and-risk-management.md), [platform-and-access-matrix.md](New%20Policy%20Docs/platform-and-access-matrix.md) | Security Officer |
+| Vulnerability scan / patch review across infrastructure and endpoints. | [sdlc-and-asset-lifecycle.md](New%20Policy%20Docs/sdlc-and-asset-lifecycle.md) §6.3 | Security Officer + CTO |
+| Tabletop drill of an incident-response scenario (e.g., ransomware, lost laptop, phishing). | [incident-and-breach-response.md](New%20Policy%20Docs/incident-and-breach-response.md) | Security Officer |
+| AI tool inventory review — confirm every AI tool listed in platform matrix is still in use; retire unused tools. | [ai-and-ml-governance.md](New%20Policy%20Docs/ai-and-ml-governance.md) §3(e) | Security Officer + CTO |
 
 ### Monthly
 
 | Task | Source | Owner |
 |---|---|---|
-| Spot-check audit logs (Aptible, AWS CloudWatch, admin console) for anomalies. | [information-security-framework.md](New Policy Docs/information-security-framework.md) | Security Officer |
-| Verify a recent backup is restorable (test restore in a non-production environment). | [hipaa-contingency-planning.md](New Policy Docs/hipaa-contingency-planning.md) | Security Officer / CTO |
-| Confirm no terminated employees still have active credentials in any system on the platform matrix. | [hipaa-passwords.md](New Policy Docs/hipaa-passwords.md), [hipaa-remote-access.md](New Policy Docs/hipaa-remote-access.md) | Security Officer |
+| Spot-check audit logs (Aptible, AWS CloudWatch, admin console) for anomalies. | [technical-safeguards.md](New%20Policy%20Docs/technical-safeguards.md) §7 Logging | Security Officer |
+| Verify a recent backup is restorable (test restore in non-production environment). | [operational-safeguards.md](New%20Policy%20Docs/operational-safeguards.md) §4 | Security Officer + CTO |
+| Confirm no terminated employees still have active credentials in any system on the platform matrix. | [technical-safeguards.md](New%20Policy%20Docs/technical-safeguards.md) §6 Termination Checklist | Security Officer |
 
 ### Event-driven
 
-These are deadlines triggered by a specific event — they are not on a schedule but missing them is a compliance failure.
+These are deadlines triggered by a specific event — not on a schedule, but missing them is a compliance failure.
 
 | Trigger | Action | Deadline | Source |
 |---|---|---|---|
-| Personnel becomes aware of a suspected breach | Report to Chief Privacy Officer | **≤ 48 hours** | [hipaa-breach-notification.md](New Policy Docs/hipaa-breach-notification.md) |
-| Confirmed breach of unsecured PHI | Notify affected individuals and applicable agencies | **≤ 60 days from Date of Discovery** | [hipaa-breach-notification.md](New Policy Docs/hipaa-breach-notification.md) |
-| Patient submits request for accounting of disclosures | Transmit request to Privacy Officer | **≤ 24 hours of receipt** | [hipaa-accounting-of-disclosures.md](New Policy Docs/hipaa-accounting-of-disclosures.md) |
-| Patient submits request for accounting of disclosures | Provide accounting (or written denial) | **≤ 60 days** (30-day extension allowed) | [hipaa-accounting-of-disclosures.md](New Policy Docs/hipaa-accounting-of-disclosures.md) |
-| Patient submits records access request | Provide access / copies (or written denial) | **≤ 30 days** (30-day extension allowed) | [hipaa-right-to-access.md](New Policy Docs/hipaa-right-to-access.md) |
-| Patient submits amendment request | Act on request (amend or deny in writing) | **≤ 60 days** (30-day extension allowed) | [hipaa-right-to-amend.md](New Policy Docs/hipaa-right-to-amend.md) |
-| Security incident reported | Preliminary investigation by Security Officer | **≤ 24 hours of report** | [hipaa-security-incidents.md](New Policy Docs/hipaa-security-incidents.md) |
-| New hire / contractor starts | HIPAA training and policy attestation before PHI access | Before access granted | [hipaa-safeguards.md](New Policy Docs/hipaa-safeguards.md), [hipaa-paper-documents.md](New Policy Docs/hipaa-paper-documents.md) |
-| New vendor / Business Associate engaged | Execute signed BAA before PHI access | Before access granted | [hipaa-business-associate-agreement.md](New Policy Docs/hipaa-business-associate-agreement.md) |
-| New vendor / Business Associate engaged | Complete ECH-style security assessment | Before contract signature | [ech-security-assessment.md](New Policy Docs/ech-security-assessment.md) |
-| Employee termination or role change removing access | Deactivate password / disable account | **Immediately** | [hipaa-passwords.md](New Policy Docs/hipaa-passwords.md) |
-| Employee termination or role change removing access | Terminate remote access; recover Company hardware | **Immediately** | [hipaa-remote-access.md](New Policy Docs/hipaa-remote-access.md) |
-| Employee termination | Deactivate and archive encryption keys | **Immediately** on HR notice | [hipaa-encryption.md](New Policy Docs/hipaa-encryption.md) |
-| Marketing communication uses PHI in a non-routine way | Privacy Officer reviews before send | Before communication | [hipaa-marketing.md](New Policy Docs/hipaa-marketing.md) |
-| New software / system in design phase | Apply SDLC controls (security review, threat model, sign-off) | Before deployment | [sdlc-and-asset-lifecycle.md](New Policy Docs/sdlc-and-asset-lifecycle.md) |
+| Personnel becomes aware of a suspected breach | Report to Privacy Officer | **≤ 48 hours** | [incident-and-breach-response.md](New%20Policy%20Docs/incident-and-breach-response.md) |
+| Confirmed breach of unsecured PHI | Notify affected individuals and applicable agencies | **≤ 60 days from Date of Discovery** | [incident-and-breach-response.md](New%20Policy%20Docs/incident-and-breach-response.md) |
+| Patient submits request for accounting of disclosures | Transmit request to Privacy Officer | **≤ 24 hours of receipt** | [patient-rights.md](New%20Policy%20Docs/patient-rights.md) |
+| Patient submits request for accounting of disclosures | Provide accounting (or written denial) | **≤ 60 days** (30-day extension allowed) | [patient-rights.md](New%20Policy%20Docs/patient-rights.md) |
+| Patient submits records access request | Provide access / copies (or written denial) | **≤ 30 days** (30-day extension allowed) | [patient-rights.md](New%20Policy%20Docs/patient-rights.md) |
+| Patient submits amendment request | Act on request (amend or deny in writing) | **≤ 60 days** (30-day extension allowed) | [patient-rights.md](New%20Policy%20Docs/patient-rights.md) |
+| Security incident reported | Preliminary investigation by Security Officer | **≤ 24 hours of report** | [incident-and-breach-response.md](New%20Policy%20Docs/incident-and-breach-response.md) |
+| New hire / contractor starts | HIPAA training and policy attestation before PHI access | Before access granted | [governance-and-risk-management.md](New%20Policy%20Docs/governance-and-risk-management.md) §IV, [acceptable-use-and-byod.md](New%20Policy%20Docs/acceptable-use-and-byod.md) |
+| New device touches PHI | MDM enrollment + signed BYOD agreement | Before access granted | [acceptable-use-and-byod.md](New%20Policy%20Docs/acceptable-use-and-byod.md) |
+| New vendor / Business Associate engaged | Execute signed BAA before PHI access | Before access granted | [vendor-and-business-associates.md](New%20Policy%20Docs/vendor-and-business-associates.md) |
+| New vendor / Business Associate engaged | Complete ECH-style security assessment | Before contract signature | [`ECH Security Assessment Questions - Questions.csv`](ECH%20Security%20Assessment%20Questions%20-%20Questions.csv) |
+| New AI tool proposed | Security + clinical/ops approval; add to platform matrix | Before any Company-data use | [ai-and-ml-governance.md](New%20Policy%20Docs/ai-and-ml-governance.md) §3(a) |
+| Employee termination / role change removing access | Deactivate password, terminate remote access, archive encryption keys, recover Company hardware, MDM-wipe BYOD | **Immediately** | [technical-safeguards.md](New%20Policy%20Docs/technical-safeguards.md) §6 |
+| Lost / stolen device | Report to Security Officer; authorize remote wipe; breach assessment | **≤ 24 hours** | [acceptable-use-and-byod.md](New%20Policy%20Docs/acceptable-use-and-byod.md) §5 |
+| Material change to production system | Change request, security review, deployment plan, rollback plan, approval | Before deploy | [sdlc-and-asset-lifecycle.md](New%20Policy%20Docs/sdlc-and-asset-lifecycle.md) §5 |
+| Critical security patch (CVSS 9.0+ or KEV-listed) | Apply per patch SLA | **≤ 7 calendar days** | [sdlc-and-asset-lifecycle.md](New%20Policy%20Docs/sdlc-and-asset-lifecycle.md) §6.2 |
 
 ---
 
@@ -118,33 +119,22 @@ Roles: **PrO** = Privacy Officer · **SO** = Security Officer · **CTO** · **CE
 
 Codes: **R** = Responsible (does the work) · **A** = Accountable (owns the outcome, signs off) · **C** = Consulted · **I** = Informed.
 
-| Policy / Area | PrO | SO | CTO | CEO | PM |
+| Policy | PrO | SO | CTO | CEO | PM |
 |---|---|---|---|---|---|
-| Information Security Framework | C | A/R | C | I | I |
-| Privacy Policy (patient-facing) | A/R | C | I | I | C |
-| SDLC & Asset Lifecycle | I | C | A/R | I | — |
-| Accounting of Disclosures | A/R | I | — | I | C |
-| Breach Notification | A/R | R | C | I | C |
-| Business Associate Agreements | A/R | C | C | I | I |
-| Contingency Planning | I | A/R | R | I | C |
-| De-Identifying PHI | A/R | C | C | I | — |
-| Definitions | A/R | I | I | I | I |
-| Encryption | I | A/R | R | I | — |
-| Marketing & PHI | A/R | C | I | I | C |
-| Minimum Necessary Rule | A/R | C | C | I | C |
-| Paper Document Management | C | A/R | — | I | R |
-| Password Management | I | A/R | R | I | C |
-| PHI Use & Disclosure | A/R | C | C | I | C |
-| Remote Access | I | A/R | R | I | C |
-| Right to Access Records | A/R | I | C | I | C |
-| Right to Amend Records | A/R | I | — | I | C |
-| Risk Management | C | A/R | C | I | I |
-| Safeguards | C | A/R | C | I | C |
-| Security Incident Management | C | A/R | R | I | C |
-| Workstation Use | I | A/R | R | I | C |
-| Platform & Access Matrix | I | A/R | C | I | C |
-| ECH Security Assessment (vendor evals) | C | A/R | C | I | — |
+| [governance-and-risk-management.md](New%20Policy%20Docs/governance-and-risk-management.md) | C | A/R | C | I | I |
+| [phi-use-and-disclosure.md](New%20Policy%20Docs/phi-use-and-disclosure.md) | A/R | C | C | I | C |
+| [patient-rights.md](New%20Policy%20Docs/patient-rights.md) | A/R | I | — | I | C |
+| [technical-safeguards.md](New%20Policy%20Docs/technical-safeguards.md) | I | A/R | R | I | — |
+| [operational-safeguards.md](New%20Policy%20Docs/operational-safeguards.md) | C | A/R | C | I | R |
+| [incident-and-breach-response.md](New%20Policy%20Docs/incident-and-breach-response.md) | A/R | A/R | R | I | C |
+| [vendor-and-business-associates.md](New%20Policy%20Docs/vendor-and-business-associates.md) | A/R | C | C | I | I |
+| [acceptable-use-and-byod.md](New%20Policy%20Docs/acceptable-use-and-byod.md) | C | A/R | C | I | C |
+| [network-and-cloud-security.md](New%20Policy%20Docs/network-and-cloud-security.md) | I | A/R | A/R | I | — |
+| [ai-and-ml-governance.md](New%20Policy%20Docs/ai-and-ml-governance.md) | C | A/R | A/R | I | C |
+| [sdlc-and-asset-lifecycle.md](New%20Policy%20Docs/sdlc-and-asset-lifecycle.md) | I | C | A/R | I | — |
+| [platform-and-access-matrix.md](New%20Policy%20Docs/platform-and-access-matrix.md) | I | A/R | C | I | C |
 | **Annual report to CEO** | R | R | C | A | I |
+| **ECH submission (vendor security questionnaire response)** | C | A/R | R | I | — |
 
 ### Signature & sign-off
 
@@ -152,16 +142,28 @@ At the end of each annual review cycle, both officers should sign off:
 
 | Role | Name | Date | Signature |
 |---|---|---|---|
-| Chief Privacy Officer | _______________ | _______________ | _______________ |
-| Chief Security Officer | _______________ | _______________ | _______________ |
+| Privacy Officer | _______________ | _______________ | _______________ |
+| Security Officer | _______________ | _______________ | _______________ |
 | Chief Executive Officer | _______________ | _______________ | _______________ |
 
 ---
 
-## Notes on the migration
+## Migration notes & timeline
 
-- This folder (`New Policy Docs/`) is now the canonical source for Millie policies. Edit the Markdown files directly and let `git` track changes.
-- The original `Policy Docs/` folder is preserved as a historical record. Older dated versions of policies (e.g., the May 1 versions superseded by May 7 / May 13 / May 18 / May 23) were not migrated — only the latest of each was carried forward.
-- Templates (Insurance Authorization, BAA template) and the March 2025 training deck were intentionally not migrated — they are forms / training material, not policy text.
-- The platform-and-access matrix and ECH security assessment were converted from `.xlsx` and contain wide tables with `NaN` placeholders for empty cells. The original spreadsheets in `Policy Docs/` remain the easier-to-edit source for those two; treat the Markdown versions as read-only snapshots.
-- **Next step (deferred):** Several policies overlap heavily (e.g., Encryption + Password + Remote Access + Workstation Use all describe technical safeguards). A follow-up task will merge related policies into fewer thematic documents.
+**May 24, 2026** — Consolidated 24 single-topic files into 10 thematic files. The 20 archived originals are in [`New Policy Docs/_archive/`](New%20Policy%20Docs/_archive/) for historical reference. Three originals stayed at the top level: `hipaa-definitions.md` (glossary), `platform-and-access-matrix.md` (reference table), `sdlc-and-asset-lifecycle.md` (expanded with change management, patch SLA, and secure coding rather than merged).
+
+**May 24, 2026** — Integrated the Millie Clinic COVID Policy into [operational-safeguards.md §A.9](New%20Policy%20Docs/operational-safeguards.md) as the live implementation example of the generic pandemic plan in Appendix A. The COVID source had a "GUIDANCE FOR STAFF: To Do…" placeholder that was never filled in — that gap is logged in [TODO.md](TODO.md).
+
+### Key findings from the May 2026 work
+
+- **`privacy-policy.md` was a misnamed bundle**, not a patient-facing Notice of Privacy Practices. Substantive content (including the Device & Media Management Policy IT-004 that existed nowhere else) was rescued into [technical-safeguards.md](New%20Policy%20Docs/technical-safeguards.md). A real NPP still needs to be authored — see [PATIENT-NOTICE-TODO.md](New%20Policy%20Docs/PATIENT-NOTICE-TODO.md).
+- **The ECH Security Assessment surfaced critical gaps**: MDM/BYOD, OWASP A02/A06/A07 remediations, pandemic plan, multi-vendor resiliency. Outstanding action items live in [TODO.md](TODO.md). Three new policy areas were authored during consolidation to close compliance gaps: Acceptable Use & BYOD, Network & Cloud Security, AI & ML Governance.
+- **`Policy Docs/AWS and Aptible Security Incident Management Policy.docx`** was added late in the process and was not integrated during the May 2026 pass. Logged in [TODO.md](TODO.md) for the next consolidation cycle.
+
+### Working documents
+
+- [POLICY-VS-QUESTIONNAIRE-MAPPING.md](POLICY-VS-QUESTIONNAIRE-MAPPING.md) — **the current authoritative coverage matrix.** For each of the 182 ECH/SIG/OWASP/AWS questionnaire rows, lists which policy file and section covers it, the coverage rating, and any remaining gaps. Refresh whenever a policy changes or a new questionnaire arrives.
+- [CONSOLIDATION-PROPOSAL.md](CONSOLIDATION-PROPOSAL.md) — historical rationale for the 24→10 consolidation. Status: EXECUTED. Keep for the "why," but day-to-day questions go to the mapping doc above.
+- [TODO.md](TODO.md) — open compliance action items.
+
+These working documents can be deleted (or moved to `_archive/`) once the first ECH submission is complete and no longer needs the supporting analysis.
