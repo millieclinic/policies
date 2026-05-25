@@ -91,7 +91,7 @@ Full encryption standards — FIPS 140-2 modules, NIST SP 800-52/77/113 in trans
 - **CloudWatch** is the centralized log destination for AWS services and Aptible application logs.
 - **AWS Config — NOT enabled** (Q26). Acknowledged gap tracked in [TODO.md](../TODO.md) #16; accepted risk pending assessor feedback. Will be enabled if requested or if the Security Officer determines it is needed.
 
-Log review cadence, alerting thresholds, and retention are governed by [technical-safeguards.md](technical-safeguards.md) §Logging & Monitoring and [information-security-framework.md](information-security-framework.md) §9.
+Log review cadence, alerting thresholds, and retention are governed by [technical-safeguards.md](technical-safeguards.md) §Logging & Monitoring and [governance-and-risk-management.md](governance-and-risk-management.md) §9.
 
 ### 8. Network Device & Wireless
 
@@ -189,7 +189,7 @@ The 33 AWS Questionnaire rows in `ECH Security Assessment Questions - Questions.
 - **CIS AWS Foundations Benchmark** (current version).
 - **OWASP Top 10 (2021)** — A05 Security Misconfiguration, A06 Vulnerable & Outdated Components, A10 SSRF.
 - **45 CFR §164.312** — HIPAA Security Rule Technical Safeguards; **§164.308(a)(1)** — Risk Analysis & Management.
-- Linked Millie policies: [information-security-framework.md](information-security-framework.md) · [technical-safeguards.md](technical-safeguards.md) · [sdlc-and-asset-lifecycle.md](sdlc-and-asset-lifecycle.md) · [incident-and-breach-response.md](incident-and-breach-response.md) · [operational-safeguards.md](operational-safeguards.md) · [governance-and-risk-management.md](governance-and-risk-management.md) · [platform-and-access-matrix.md](platform-and-access-matrix.md) · [hipaa-definitions.md](hipaa-definitions.md).
+- Linked Millie policies: [governance-and-risk-management.md](governance-and-risk-management.md) · [technical-safeguards.md](technical-safeguards.md) · [sdlc-and-asset-lifecycle.md](sdlc-and-asset-lifecycle.md) · [incident-and-breach-response.md](incident-and-breach-response.md) · [operational-safeguards.md](operational-safeguards.md) · [governance-and-risk-management.md](governance-and-risk-management.md) · [platform-and-access-matrix.md](platform-and-access-matrix.md) · [hipaa-definitions.md](hipaa-definitions.md).
 - Evidence: `ECH Security Assessment Questions - Questions.csv` rows 2–33 (AWS), 76/77/81 (OWASP A05/A06/A10), 136–145 (SIG N).
 - [TODO.md](../TODO.md) — open remediation items referenced throughout this Policy.
 

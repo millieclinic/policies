@@ -29,7 +29,7 @@ Acceptable Use applies to email, calendar, chat (Slack), file storage (Google Wo
 
 **2. Email.** Company email is for Company business. Personnel shall:
 - Not auto-forward Company email to a personal account.
-- Not send PHI to any address that is not a Company-issued account or a Business Associate's secured channel (see [hipaa-business-associate-agreement.md](hipaa-business-associate-agreement.md)).
+- Not send PHI to any address that is not a Company-issued account or a Business Associate's secured channel (see [vendor-and-business-associates.md](vendor-and-business-associates.md)).
 - Treat unexpected attachments and links as suspicious; report suspected phishing to the Security Officer.
 - Not use Company email to register for unrelated personal services.
 
@@ -121,7 +121,7 @@ A lost or stolen device that may have accessed PHI is treated as a potential bre
 
 **3. Risk assessment for breach determination.** The Security Officer (with the Privacy Officer) shall complete a risk assessment under [incident-and-breach-response.md](incident-and-breach-response.md) to determine whether the loss constitutes a Breach of Unsecured PHI requiring notification under 45 CFR §§164.400–414. Factors include whether the device was encrypted, whether the screen was locked, what PHI was accessible, and whether a remote wipe completed successfully.
 
-**4. Document.** The event, the assessment, and any corrective action are recorded in the Security Incident Log per [hipaa-security-incidents.md](hipaa-security-incidents.md).
+**4. Document.** The event, the assessment, and any corrective action are recorded in the Security Incident Log per [incident-and-breach-response.md](incident-and-breach-response.md).
 
 ### F. Offboarding
 
@@ -157,7 +157,7 @@ Any personnel member who violates this Policy will be subject to disciplinary ac
 - §M.1.6 — BYOD mobile devices with access to scoped data.
 
 **Linked Millie policies:**
-- [technical-safeguards.md](technical-safeguards.md), [hipaa-business-associate-agreement.md](hipaa-business-associate-agreement.md), [incident-and-breach-response.md](incident-and-breach-response.md), [hipaa-security-incidents.md](hipaa-security-incidents.md), [governance-and-risk-management.md](governance-and-risk-management.md), [platform-and-access-matrix.md](platform-and-access-matrix.md), [hipaa-definitions.md](hipaa-definitions.md).
+- [technical-safeguards.md](technical-safeguards.md), [vendor-and-business-associates.md](vendor-and-business-associates.md), [incident-and-breach-response.md](incident-and-breach-response.md), [incident-and-breach-response.md](incident-and-breach-response.md), [governance-and-risk-management.md](governance-and-risk-management.md), [platform-and-access-matrix.md](platform-and-access-matrix.md), [hipaa-definitions.md](hipaa-definitions.md).
 
 ## VII. Definitions used in this Policy
 

@@ -224,14 +224,14 @@ Millie does not process, store, or transmit cardholder data — payment processi
 
 | Rating | Count | % |
 |---|---|---|
-| Full | 116 | 64% |
-| Partial | 14 | 8% |
-| None | 1 | 0.5% |
-| Open Action (tracked in TODO.md / PATIENT-NOTICE-TODO.md) | 9 | 5% |
-| Out-of-scope | 42 | 23% |
+| Full | 104 | 57% |
+| Partial | 20 | 11% |
+| None | 0 | 0% |
+| Open Action (tracked in TODO.md / PATIENT-NOTICE-TODO.md) | 8 | 4% |
+| Out-of-scope | 50 | 28% |
 | **Total** | **182** | **100%** |
 
-The single `None` row is **CSV row 55 (DMARC configured)** — flagged as a new gap surfaced during this re-mapping pass; not currently in TODO.md.
+No rows are rated `None`. The closest things to an unaddressed gap are: **CSV row 55 (DMARC configured)** — rated `Open Action` here because no current policy addresses it, but it is not yet in TODO.md and should be added; and the operational follow-ups already enumerated in TODO.md (rows 73, 77, 78, 132–134, etc., which are policy-Full but operationally open).
 
 ### 2.2 Per-questionnaire breakdown
 

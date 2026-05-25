@@ -200,7 +200,7 @@ Log records include actor identity, timestamp (UTC), source IP or device identif
 
 **c. Alert thresholds.** Automated alerts are configured for, at minimum: repeated authentication failures from a single source, MFA bypass attempts, privilege escalation outside the change-management window, anomalous PHI-export volume, encryption-key access by an unexpected principal, and detection of default credentials in production. Threshold tuning is reviewed quarterly.
 
-**d. Cross-reference.** Log retention duration, breach-notification escalation paths, and risk-management integration are governed by [governance-and-risk-management.md](governance-and-risk-management.md) and [hipaa-security-incidents.md](hipaa-security-incidents.md).
+**d. Cross-reference.** Log retention duration, breach-notification escalation paths, and risk-management integration are governed by [governance-and-risk-management.md](governance-and-risk-management.md) and [incident-and-breach-response.md](incident-and-breach-response.md).
 
 ## IV. Training & Awareness
 
@@ -237,9 +237,9 @@ Any personnel member who violates this Policy will be subject to disciplinary ac
 **Related Millie policies.**
 
 * [governance-and-risk-management.md](governance-and-risk-management.md) — training program, log retention, risk management.
-* [hipaa-security-incidents.md](hipaa-security-incidents.md) — incident response and escalation.
-* [hipaa-safeguards.md](hipaa-safeguards.md) — administrative and physical safeguards.
-* [hipaa-risk-management.md](hipaa-risk-management.md) — risk analysis methodology.
+* [incident-and-breach-response.md](incident-and-breach-response.md) — incident response and escalation.
+* [operational-safeguards.md](operational-safeguards.md) — administrative and physical safeguards.
+* [governance-and-risk-management.md](governance-and-risk-management.md) — risk analysis methodology.
 * [platform-and-access-matrix.md](platform-and-access-matrix.md) — system-by-system access provisioning.
 * [sdlc-and-asset-lifecycle.md](sdlc-and-asset-lifecycle.md) — secure development and asset lifecycle.
 * [hipaa-definitions.md](hipaa-definitions.md) — glossary.
