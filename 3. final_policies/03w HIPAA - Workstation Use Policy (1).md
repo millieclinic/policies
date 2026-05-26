@@ -27,6 +27,8 @@ This Policy applies to all facilities and locations owned, operated, or managed 
 18. Unless authorized or otherwise directed by Company, work-related data and files must be stored on the external hosting platform with which Company contracts, in the Company app or on the network server of the IT System, and not on a computer C drive, CD or thumb drive nor directly on a mobile phone or iPad.
 19. Users shall secure media (e.g., hard copy or CDs but not mobile phones) that contains PHI in a locked desk, cabinet or room.
 20. Users must comply with any other applicable Company policies when using Workstations, including Company’s Password Management Policy.
-21. **References**
+21. *BYOD & Mobile Device Management*.
+22. Personal devices (Bring-Your-Own-Device, or “BYOD”) may be used for Company email, messaging, and approved SaaS only. PHI must not be stored locally on personal devices. Any device — Company-issued or personal — that accesses PHI must be enrolled in Company’s mobile device management (“MDM”) program, must require a device passcode with auto-lock and disk encryption, and must support remote wipe of Company data. Personal devices that are not enrolled in MDM are restricted to web-based SaaS accessed via single sign-on with multi-factor authentication and may not store PHI. The Chief Security Officer may remotely wipe Company data from any enrolled device upon termination, role change that removes PHI access, or loss/theft of the device.
+23. **References**
 
 * 45 C.F.R. § 164.310(b)

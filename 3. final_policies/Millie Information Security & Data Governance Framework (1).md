@@ -45,6 +45,8 @@ All PHI transmitted externally must be encrypted. Data sharing is governed by th
 
 Secure channels are required for all remote access and data transmission.
 
+Millie uses Google Workspace's built-in anti-malware and email filtering with no custom exclusions. Transactional and clinical email originating from Millie-owned domains is configured with SPF, DKIM, and a DMARC policy set to at least `quarantine`, and the DMARC posture is monitored. Vulnerability scanning is performed against in-scope hosted services (Aptible, AWS) with no application-side exclusions; any one-off operational exclusion to anti-malware or vulnerability scanning requires Chief Security Officer approval.
+
 # 7. Logging, Monitoring & Audit Controls
 
 Millie maintains logs across systems including Aptible, AWS CloudWatch, and internal admin dashboards.

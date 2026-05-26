@@ -28,6 +28,9 @@ This Policy applies to all facilities and locations owned, operated, or managed 
 19. Personnel shall not disclose to any third parties the terms of this Policy or the elements of any specific plans and procedures that are developed by Company pursuant to this Policy except as necessary to carry out this Policy.
 20. *Insurance*.
 21. The Chief Security Officer, together with the General Counsel, shall take steps to obtain the appropriate type and level of insurance coverage to be procured and maintained by Company to cover Company in the event of emergencies.
-22. **References**
+22. *Pandemic Operations & Multi-Vendor Risk*.
+23. For pandemic or widespread infectious-disease events, Company’s separately maintained COVID Policy (and any successor policy) governs patient-facing clinical interactions, including isolation, exposure, and PPE protocols, which follow current CDPH and CDC guidance. From an operational continuity standpoint, clinical operations may shift to a telehealth-first scheduling posture, on-site staffing may reduce to essential personnel, and the Chief Security Officer in coordination with the Chief Executive Officer is responsible for activating remote-work, telehealth-fallback, and supply-continuity provisions.
+24. Company operates a cloud-first technology stack with single-vendor dependencies on Aptible (compute and managed databases), AWS (storage, logging, and identity), Cloudflare (DNS and CDN), and Google Workspace (collaboration). This vendor concentration is a documented accepted risk reviewed at least annually by the Chief Security Officer. The review covers each critical vendor’s availability posture, data portability and exit considerations, and Business Associate Agreement status, and is factored into Company’s broader risk management process.
+25. **References**
 
 * 45 C.F.R. §§ 164.530 & 164.308(a)(7)
