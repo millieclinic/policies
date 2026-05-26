@@ -10,6 +10,8 @@ This repository is the source of truth for Millie's HIPAA and information securi
 
 - **`New Policy Docs/`** — current canonical policies in Markdown. Edit these. 10 thematic policies + 3 reference files + 1 TODO + 1 `forms/` subfolder.
 - **`New Policy Docs/_archive/`** — the 20 single-topic policy files from the May 2026 consolidation. Historical reference only; don't edit.
+- **`policy_docs_word/`** — Word (.docx) renderings of every active policy + this README, generated from the Markdown sources. **For execs / non-engineering reviewers** — open directly in Word, or drag the folder into Google Drive and each file auto-converts to a native Google Doc. Regenerate after editing any policy with `./scripts/build-word-docs.sh`. Do NOT edit these directly — your changes will be overwritten on the next rebuild.
+- **`scripts/build-word-docs.sh`** — re-runnable converter (Markdown → .docx via pandoc). Installs pandoc on first run if missing.
 - **`Policy Docs/`** — original `.docx` / `.pdf` / `.xlsx` source files from the pre-Markdown era. Don't edit.
 - **`ECH Security Assessment Questions - Questions.csv`** — third-party vendor questionnaire Millie completes (AWS / ISD / OWASP / PCI / SIG Lite / Insurance / Security Audits).
 - **`CONSOLIDATION-PROPOSAL.md`** + **`POLICY-VS-QUESTIONNAIRE-MAPPING.md`** — working documents that drove the consolidation; useful for understanding why files are structured as they are.
