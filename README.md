@@ -17,6 +17,8 @@ This repository is the source of truth for Millie's HIPAA and information securi
 **Repo-layout supporting folders:**
 
 - **`Policy Docs/`** — the original `.doc` / `.docx` / `.pdf` / `.xlsx` source files. Don't edit; they're the immutable inputs that folder 1 was generated from.
+- **`policy_docs_word/`** — exec-facing bundle. For each file in folder 3: if the policy is unchanged from the original, this folder gets the *original* `.docx` (or `.xlsx` / `.pdf`) from `Policy Docs/` — perfect Word formatting preserved. For the 3 policies that have ECH-driven clauses appended, this folder gets a pandoc-converted `.docx` (readable Word doc; styling not identical to the original). `CHANGES.docx` is pandoc-converted from `3. final_policies/CHANGES.md`. Regenerate after any policy edit with `./scripts/build-word-docs.py`. Don't edit — your changes get overwritten on the next rebuild.
+- **`scripts/build-word-docs.py`** — the re-runnable build script (Python; uses pandoc for the converted files, plain copy for the unchanged ones). Auto-installs pandoc via Homebrew if missing.
 - **`ECH Security Assessment Questions - Questions.csv`** — the questionnaire that drives the gap analysis.
 - **`_old_attempt/`** — a previous consolidation pass that diverged too far from the originals (rewrote in a fresh template, broke Word formatting, added a lot of structure that ECH wasn't actually asking for). Preserved for reference; not authoritative.
 
