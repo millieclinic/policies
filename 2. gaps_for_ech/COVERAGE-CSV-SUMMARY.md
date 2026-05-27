@@ -2,71 +2,79 @@
 
 This summary describes the row-by-row coverage matrix at `coverage_matrix.csv` in the same directory. The CSV is the authoritative per-row analysis; `SUMMARY.md` and `GAPS.md` remain useful for exec-readable structure.
 
-The matrix is generated against the 29-policy `3. final_policies/` set. Column 5 of the CSV is **Plain English** — a layman's translation of each questionnaire item for non-security readers.
+The matrix is generated against the 29-policy `3. final_policies/` set. The CSV's **Plain English** column is a layman's translation of each questionnaire item for non-security readers.
 
-**Total rows:** 182 (expected 182)
+**Source CSV:** `ECH Security Assessment Questions - Sheet2.csv` (repo root) — the expanded 212-row × 16-column workbook supersedes the prior 182-row `Questions.csv`. New columns include `Additional Info Added` (col 7), which carries user-authoritative answers and overrides the AI-provided coverage where populated.
+
+**Total rows:** 212 (expected 212; previously 182)
 
 ## Coverage counts
 
 | Coverage | Count |
 |---|---|
-| Full | 102 |
-| Partial | 36 |
+| Full | 119 |
+| Partial | 40 |
 | None | 0 |
-| N/A | 41 |
-| Evidence-only | 3 |
+| N/A | 49 |
+| Evidence-only | 4 |
 
 ## Flag Risk counts
 
 | Flag Risk | Count |
 |---|---|
 | High | 19 |
-| Medium | 18 |
-| Low | 104 |
-| None | 41 |
+| Medium | 23 |
+| Low | 121 |
+| None | 49 |
 
 ## Required Fix totals
 
-**Total word count of all `Required Fix - Text` values:** 715
+**Total word count of all `Required Fix - Text` values:** 750
 
 ### Files needing additions (cumulative words)
 
 | File | Cumulative words |
 |---|---|
 | `Millie Information Security & Data Governance Framework (1).md` | 543 |
-| `System Development Life Cycle (SDLC) & Asset Lifecycle Policy.md` | 57 |
+| `System Development Life Cycle (SDLC) & Asset Lifecycle Policy.md` | 92 |
 | `03o HIPAA - Password Management Policy.md` | 53 |
 | `03s HIPAA - Security Incident Management Policy (2).md` | 31 |
 | `03d HIPAA - Contingency Planning Policy (1).md` | 31 |
 
-## Top 10 highest-priority rows (Flag Risk = High)
+The SDLC file's cumulative word count rose from 57 to 92 because the new SIG Lite I.3.1 row (web-server configuration standards) appends a hardening-baseline clause.
 
-Ordered by which assessor red-flag they represent (missing-control rows first, then evidence-only, then terminology / framing gaps).
+## Top High-risk rows (Flag Risk = High)
 
-| # | Questionnaire | Section | Item | Question (abbrev) | Gap |
-|---|---|---|---|---|---|
-| 1 | Insurances | Insurances | 1 | Do you have document "Cyber Liability / Data Privacy"? | Contingency Planning Policy commits to obtaining the coverage but the actual certificate is the deliverable; submission must include the certificate as an attachment. |
-| 2 | Security Audits | Security Audits | 1 | Do you have document "Penetration Testing"? | No pentest evidence exists; either commission a third-party pentest (recommended) or answer truthfully that none is on file. Submission impact depends on ECH appetite. |
-| 3 | Security Audits | Security Audits | 2 | Do you have document "General Security Audit"? | No external audit attestation; provide the annual internal HIPAA risk assessment as a compensating artifact and disclose plans for a third-party audit if planned. |
-| 4 | SIG Lite 2025 | K. Operational Resilience | K.2 | Is there a formal, documented information technology disaster recovery exercise … | Source CSV flagged FOLLOW UP. Contingency Planning Policy currently describes backups, DR plan, and third-party coordination but does not require periodic exercise/testing of the DR plan. |
-| 5 | SIG Lite 2025 | M. Endpoint Security | M.1.3 | M.1.3 Is there a mobile device management program in place that has been approve… | Source CSV answered NO and flagged FOLLOW UP. Workstation Use §III(d) now contains the documented program, but MDM tooling implementation is operationally pending and the assessor may want vendor confirmation. |
-| 6 | SIG Lite 2025 | M. Endpoint Security | M.1.5 | M.1.5 Are non-company managed computing devices used to connect to the company n… | Source CSV answered YES and flagged FOLLOW UP. Workstation Use §III(d) now contains the restriction; assessor may still want network-segmentation evidence. |
-| 7 | SIG Lite 2025 | M. Endpoint Security | M.1.5 | M.1.6 Are any mobile devices with access to scoped data Constituent owned (BYOD)… | Source CSV answered YES and flagged FOLLOW UP. Workstation Use §III(d) now contains the BYOD posture; assessor may want MDM enrollment evidence. |
-| 8 | OWASP Top 10 | A02:2021 - Cryptographic Failures | 1 | Do you protect sensitive data, such as financial, healthcare, and PII through ex… | Source CSV explicitly flagged 'Need update to password storage' with Remediate=Yes; Password Management Policy currently covers user password hygiene but lacks an explicit server-side hashing clause. |
-| 9 | OWASP Top 10 | A06:2021 - Vulnerable and Outdated Components | 1 | Do you regularly scan for vulnerabilities and is there a patch management proces… | Source CSV flagged 'Upgrade Github, Remediate=Yes'; current policy lacks an explicit scanner-cadence-and-patch-SLA clause. |
-| 10 | OWASP Top 10 | A07:2021 - Identification and Authentication Failures | 1 | Do you protect against attackers compromising passwords, keys, or session tokens… | Source CSV flagged Remediate=Yes; Password Management Policy currently covers user password hygiene but lacks explicit session-token / brute-force language. |
+19 rows are High-risk. Submission-evidence rows (Insurances, Security Audits) and Supply Chain Risk Management (S.32, S.57, S.61, S.80, S.100) dominate. The full list is in the CSV — filter `Flag Risk = High`.
+
+Notable groupings:
+
+| Group | Items | Driver |
+|---|---|---|
+| Submission-evidence artifacts | Insurances 1, Security Audits 1 & 2 | Documents must be attached to the ECH submission; no policy edit. |
+| Endpoint / MDM operationalization | M.1.3, M.1.5, M.1.6 | Workstation Use §III(d) documents the BYOD/MDM stance; vendor implementation pending. |
+| Supply Chain Risk (NIST SP 800-161) | S.32, S.57, S.61, S.80, S.100 | C-SCRM program not adopted at Millie's scale; defensible but assessor may push back. |
+| Operational resilience | K.2, K.4, K.30 | DR exercise, pandemic plan, multi-vendor resiliency strategy require explicit articulation. |
+| OWASP / app-security framing | A02, A06, A07 | Password Management Policy lacks server-side hashing / scanner-cadence / session-token language. |
+| Monitoring methodology | G.2, J.5 | Change control + log-review cadence not documented at required specificity. |
 
 ## Per-questionnaire breakdown
 
 | Questionnaire | Total | Full | Partial | None | N/A | Evidence-only |
 |---|---|---|---|---|---|---|
 | AWS Questionnaire | 32 | 17 | 12 | 0 | 3 | 0 |
-| ISD IT Risk Assessment | 38 | 36 | 0 | 0 | 2 | 0 |
+| ISD IT Risk Assessment | 50 | 45 | 0 | 0 | 4 | 1 |
 | OWASP Top 10 | 10 | 4 | 6 | 0 | 0 | 0 |
 | PCI DSS Assessment Form | 10 | 0 | 0 | 0 | 10 | 0 |
-| SIG Lite 2025 | 89 | 45 | 18 | 0 | 26 | 0 |
+| SIG Lite 2025 | 107 | 53 | 22 | 0 | 32 | 0 |
 | Insurances | 1 | 0 | 0 | 0 | 0 | 1 |
 | Security Audits | 2 | 0 | 0 | 0 | 0 | 2 |
+
+ISD grew by 12 rows (mostly Additional Cybersecurity 5.x SMTP/email subqueries plus End-user / Telecom / Server sub-detail). SIG Lite grew by 18 rows (mostly P.2.x privacy classifications, M.1.x endpoint subqueries, H.2.1 password confidentiality, I.3.x web/API hardening, J.5.1 malware monitoring, P.3.1 / P.5.1 / P.5.3 privacy documentation).
+
+## User-authoritative overrides
+
+10 rows have user-populated `Additional Info Added`. In each case the authoritative text is prepended to the Proposed Answer, Coverage is upgraded where warranted (Partial → Full, Evidence-only → Full), and Flag Risk is lowered one step (Medium → Low, High → Medium). The 10 rows are: Request Details Q1, Q2, Q8; Identity & Access Management Q1; Additional Cybersecurity 5.6; SIG Lite A.1, B.1, B.2, C.1, C.4.
 
 ---
 
