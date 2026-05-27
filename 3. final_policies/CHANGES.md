@@ -65,14 +65,18 @@ Per the gap analysis, the following questionnaire-surfaced items did **not** dri
 
 ## 4. Inventory after changes
 
-28 files remain in `3. final_policies/`:
+29 files remain in `3. final_policies/`:
 
 - **Privacy / patient-rights HIPAA suite (10):** Accounting of Disclosures, Breach Notification, BAA Policy, De-Identifying PHI, Definitions, Marketing, Min Necessary Rule, Paper Document Mgmt, Right to Access, Right to Amend, Use & Disclosure of PHI, Privacy Policy *(L-series + standalone)*
 - **Security / technical HIPAA suite (5):** Contingency Planning *(+ pandemic / multi-vendor clause)*, Encryption, Password Mgmt, Remote Access, Risk Mgmt, Safeguards, Security Incident Mgmt, Workstation Use *(+ BYOD / MDM clause)* *(IT-series)*
 - **Frameworks & lifecycle (3):** Information Security & Data Governance Framework *(+ email auth clause)*, SDLC & Asset Lifecycle Policy, AWS and Aptible Security Incident Management Policy
 - **Templates (2):** BAA-for-Subcontractor template, Insurance Authorization template
-- **Operational (2):** Millie Clinic COVID Policy, Platform Matrix
+- **Operational (3):** Millie Clinic COVID Policy, Medical Waste Management Plan, Platform Matrix
 - **Reference (1):** ECH Security Assessment Questions snapshot
+
+## 4a. Later additions
+
+- **2026-05-26 — Medical Waste Management Plan.** Existing Millie document that wasn't in the original inventory. Converted via markitdown and added to both folders 1 and 3 unchanged. Covers California Medical Waste Management Act compliance (HSC §§ 117935, 117960) for small-quantity-generator status. Authored by Patricia Bevitz (Director of Clinical Operations). Not driven by ECH; added for completeness. Net effect on gap analysis: 2 SIG ESG rows moved from N/A to Partial — **O.4** (hazardous/toxic chemical handling, storage, disposal) and **O.9** (Health & Safety policy) — because the Waste Plan plus the COVID Policy and Safeguards Policy together substantively address them. Neither requires a Required Fix; the Waste Plan itself is the answer.
 
 ---
 

@@ -2,6 +2,8 @@
 
 This summary describes the row-by-row coverage matrix at `coverage_matrix.csv` in the same directory. The CSV is the authoritative per-row analysis; `SUMMARY.md` and `GAPS.md` remain useful for exec-readable structure.
 
+The matrix is generated against the 29-policy `3. final_policies/` set. Column 5 of the CSV is **Plain English** — a layman's translation of each questionnaire item for non-security readers.
+
 **Total rows:** 182 (expected 182)
 
 ## Coverage counts
@@ -9,9 +11,9 @@ This summary describes the row-by-row coverage matrix at `coverage_matrix.csv` i
 | Coverage | Count |
 |---|---|
 | Full | 102 |
-| Partial | 34 |
+| Partial | 36 |
 | None | 0 |
-| N/A | 43 |
+| N/A | 41 |
 | Evidence-only | 3 |
 
 ## Flag Risk counts
@@ -20,8 +22,8 @@ This summary describes the row-by-row coverage matrix at `coverage_matrix.csv` i
 |---|---|
 | High | 19 |
 | Medium | 18 |
-| Low | 102 |
-| None | 43 |
+| Low | 104 |
+| None | 41 |
 
 ## Required Fix totals
 
@@ -62,7 +64,7 @@ Ordered by which assessor red-flag they represent (missing-control rows first, t
 | ISD IT Risk Assessment | 38 | 36 | 0 | 0 | 2 | 0 |
 | OWASP Top 10 | 10 | 4 | 6 | 0 | 0 | 0 |
 | PCI DSS Assessment Form | 10 | 0 | 0 | 0 | 10 | 0 |
-| SIG Lite 2025 | 89 | 45 | 16 | 0 | 28 | 0 |
+| SIG Lite 2025 | 89 | 45 | 18 | 0 | 26 | 0 |
 | Insurances | 1 | 0 | 0 | 0 | 0 | 1 |
 | Security Audits | 2 | 0 | 0 | 0 | 0 | 2 |
 
