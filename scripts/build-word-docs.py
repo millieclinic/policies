@@ -60,6 +60,22 @@ def find_source(stem: str) -> Path | None:
     return None
 
 
+def find_source_by_content(md_path: Path) -> Path | None:
+    """Look for a folder-1 .md with byte-identical content, then return its
+    matching `.docx` / `.pdf` / `.xlsx` source from POLICY_DOCS.
+
+    This handles the case where folder-3 files were renamed (so name-match
+    fails) but their content is still unchanged from the baseline — we want
+    to ship the original Word file with perfect fidelity rather than
+    pandoc-rendering it.
+    """
+    target_bytes = md_path.read_bytes()
+    for f1_md in FOLDER_1.glob("*.md"):
+        if f1_md.read_bytes() == target_bytes:
+            return find_source(f1_md.stem)
+    return None
+
+
 _ROMAN = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"]
 _LETTERS = "abcdefghijklmnopqrstuvwxyz"
 
@@ -221,23 +237,24 @@ def main() -> None:
     for md_file in sorted(FOLDER_3.glob("*.md")):
         stem = md_file.stem
 
-        # CHANGES.md (and any other generated MD without a source) → pandoc
-        source = find_source(stem)
-        if stem == "CHANGES" or source is None:
+        # CHANGES.md → always pandoc (no source)
+        if stem == "CHANGES":
             dst = OUT / f"{stem}.docx"
             pandoc_to_docx(md_file, dst)
             stats["pandoc_generated"] += 1
             print(f"  [pandoc, no source]  {dst.name}")
             continue
 
-        # Is this .md modified vs the folder-1 baseline?
-        folder1_md = FOLDER_1 / md_file.name
-        unchanged = folder1_md.exists() and filecmp.cmp(
-            md_file, folder1_md, shallow=False
-        )
+        # Try to find the original source (matching by name first, then by content
+        # since folder-3 files may have been renamed).
+        source = find_source(stem)
+        if source is None:
+            source = find_source_by_content(md_file)
 
-        if unchanged:
-            dst = OUT / source.name
+        if source is not None:
+            # Content-identical to the original — copy the source file for perfect fidelity.
+            # Output filename uses the new (folder-3) name with the source extension.
+            dst = OUT / f"{stem}{source.suffix}"
             shutil.copy2(source, dst)
             if source.suffix == ".docx":
                 stats["copied_docx"] += 1
@@ -245,7 +262,7 @@ def main() -> None:
                 stats["copied_other"] += 1
             print(f"  [copy {source.suffix:>5}]     {dst.name}")
         else:
-            # Modified — pandoc the .md so the additions are reflected
+            # Modified, merged, or new — pandoc the .md so the additions are reflected.
             dst = OUT / f"{stem}.docx"
             pandoc_to_docx(md_file, dst)
             stats["pandoc_modified"] += 1
