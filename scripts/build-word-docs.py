@@ -237,8 +237,8 @@ def main() -> None:
     for md_file in sorted(FOLDER_3.glob("*.md")):
         stem = md_file.stem
 
-        # CHANGES.md → always pandoc (no source)
-        if stem == "CHANGES":
+        # CHANGES.md / PER-FILE-CHANGELOG.md → always pandoc (no source)
+        if stem in ("CHANGES", "PER-FILE-CHANGELOG"):
             dst = OUT / f"{stem}.docx"
             pandoc_to_docx(md_file, dst)
             stats["pandoc_generated"] += 1
