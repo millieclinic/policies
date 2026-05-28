@@ -1,6 +1,6 @@
-# Changes — folder 3 vs folder 1
+# Changes — Final Markdown vs Original Converted Markdown
 
-Folder 3 started as an exact copy of `1. original_docs_markdown/` (37 files, no edits). This document lists every change applied on top, and why. The full diff is visible per-file in git history; this is the executive-readable summary.
+`3. Final Word/3.a Final Markdown/` started as an exact copy of `1. Original Docs (Word)/1.a Original Converted to MD/` (37 files, no edits). This document lists every change applied on top, and why. The full diff is visible per-file in git history; this is the executive-readable summary.
 
 **Net change: 37 → 28 files, with 3 short clauses added to existing policies.** No new files were authored. No content was rewritten.
 
@@ -8,7 +8,7 @@ Folder 3 started as an exact copy of `1. original_docs_markdown/` (37 files, no 
 
 ## 1. Deletions — superseded duplicate versions (9 files removed)
 
-The originals included pairs / quadruplets of the same policy at different revision dates. We keep the newest of each and remove the rest. The originals remain untouched in `1. original_docs_markdown/` for full audit history.
+The originals included pairs / quadruplets of the same policy at different revision dates. We keep the newest of each and remove the rest. The originals remain untouched in `1. Original Docs (Word)/1.a Original Converted to MD/` for full audit history.
 
 | Removed | Kept | Why |
 |---|---|---|
@@ -28,7 +28,7 @@ These nine deletions reduce the policy set to 28 files without losing any conten
 
 ## 2. Additions — three short ECH-required clauses
 
-Driven by `2. gaps_for_ech/GAPS.md`. Each was appended to an existing policy in its native voice (numbered list, italic sub-section header, formal "Company shall…" tone) so it reads as part of the original rather than a bolted-on extension.
+Driven by `2. Gaps/2.a Gaps Markdown/GAPS.md`. Each was appended to an existing policy in its native voice (numbered list, italic sub-section header, formal "Company shall…" tone) so it reads as part of the original rather than a bolted-on extension.
 
 ### 2.1 — Email Authentication & Anti-Malware Exclusions
 
@@ -59,13 +59,13 @@ Per the gap analysis, the following questionnaire-surfaced items did **not** dri
 
 - **Cyber-liability certificate + pentest / audit attestation** (Insurances row 181; Security Audits rows 182–183) — these are evidence attachments for the ECH submission package, not policy text. The Contingency Planning Policy already commits to obtaining cyber-liability insurance; the actual certificate lives in business records.
 - **Operational AWS judgment calls** (IAM users with console access, wildcard admin, AWS Config off, public subnet residue) — covered by honest answers in the ECH CSV; no policy edit warranted at Millie's size.
-- **PCI DSS, ESG, IoMT, GLBA, antitrust, fraud-prevention program, standalone HR security policy, AI policy** — all marked N/A in the gap analysis. Answer N/A on the submission with the one-line justifications in `2. gaps_for_ech/NA-justifications.md`.
+- **PCI DSS, ESG, IoMT, GLBA, antitrust, fraud-prevention program, standalone HR security policy, AI policy** — all marked N/A in the gap analysis. Answer N/A on the submission with the one-line justifications in `2. Gaps/2.a Gaps Markdown/NA-justifications.md`.
 
 ---
 
 ## 4. Inventory after changes
 
-29 files remain in `3. final_policies/`:
+29 files remain in `3. Final Word/3.a Final Markdown/`:
 
 - **Privacy / patient-rights HIPAA suite (10):** Accounting of Disclosures, Breach Notification, BAA Policy, De-Identifying PHI, Definitions, Marketing, Min Necessary Rule, Paper Document Mgmt, Right to Access, Right to Amend, Use & Disclosure of PHI, Privacy Policy *(L-series + standalone)*
 - **Security / technical HIPAA suite (5):** Contingency Planning *(+ pandemic / multi-vendor clause)*, Encryption, Password Mgmt, Remote Access, Risk Mgmt, Safeguards, Security Incident Mgmt, Workstation Use *(+ BYOD / MDM clause)* *(IT-series)*
@@ -82,7 +82,7 @@ Per the gap analysis, the following questionnaire-surfaced items did **not** dri
 
 ## 5. How to maintain this folder
 
-1. **When ECH changes** (new vendor questionnaire, regulator update): start in `2. gaps_for_ech/`. Re-run the section-level analysis. Default to N/A unless ECH explicitly asks for new policy text.
+1. **When ECH changes** (new vendor questionnaire, regulator update): start in `2. Gaps/2.a Gaps Markdown/`. Re-run the section-level analysis. Default to N/A unless ECH explicitly asks for new policy text.
 2. **When a real gap appears**: append the smallest possible clause to an *existing* file here. Don't create a new file unless the gap is genuinely orthogonal to every existing policy.
-3. **When a policy is materially revised**: edit the file here directly. The diff against `1. original_docs_markdown/` shows total drift from the original; the per-file git history shows what changed when.
+3. **When a policy is materially revised**: edit the file here directly. The diff against `1. Original Docs (Word)/1.a Original Converted to MD/` shows total drift from the original; the per-file git history shows what changed when.
 4. **Quarterly / annual review burden** is sized by file count. Keep this folder lean.

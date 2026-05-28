@@ -30,12 +30,12 @@ import tempfile
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
-POLICY_DOCS = REPO / "Policy Docs"
-FOLDER_1 = REPO / "1. original_docs_markdown"
-FOLDER_3 = REPO / "3. final_policies"
-FOLDER_2 = REPO / "2. gaps_for_ech"
-OUT = REPO / "policy_docs_word"
-OUT_GAP = OUT / "gap_analysis"
+POLICY_DOCS = REPO / "1. Original Docs (Word)"
+FOLDER_1 = POLICY_DOCS / "1.a Original Converted to MD"
+FOLDER_2 = REPO / "2. Gaps" / "2.a Gaps Markdown"
+OUT_GAP = REPO / "2. Gaps"
+OUT = REPO / "3. Final Word"
+FOLDER_3 = OUT / "3.a Final Markdown"
 
 
 def ensure_pandoc() -> None:
@@ -256,12 +256,12 @@ def main() -> None:
     # so an exec can review the analysis alongside the policies.
     if FOLDER_2.exists():
         print()
-        print("Gap analysis:")
+        print(f"Gap analysis (writing to {OUT_GAP.relative_to(REPO)}/):")
         for md_file in sorted(FOLDER_2.glob("*.md")):
             dst = OUT_GAP / f"{md_file.stem}.docx"
             pandoc_to_docx(md_file, dst)
             stats["gap_docx"] += 1
-            print(f"  [pandoc]   gap_analysis/{dst.name}")
+            print(f"  [pandoc]   {dst.name}")
         for csv_file in sorted(FOLDER_2.glob("*.csv")):
             dst = OUT_GAP / f"{csv_file.stem}.xlsx"
             try:
@@ -301,16 +301,18 @@ def main() -> None:
                 ws.freeze_panes = "A2"
                 wb.save(dst)
                 stats["gap_xlsx"] += 1
-                print(f"  [xlsx]     gap_analysis/{dst.name}")
+                print(f"  [xlsx]     {dst.name}")
             except Exception as e:
                 # Fallback: plain copy of the CSV
                 shutil.copy2(csv_file, OUT_GAP / csv_file.name)
                 stats["gap_xlsx"] += 1
-                print(f"  [copy csv (xlsx failed: {e})] gap_analysis/{csv_file.name}")
+                print(f"  [copy csv (xlsx failed: {e})] {csv_file.name}")
 
     total = sum(stats.values())
     print()
-    print(f"Done. {total} files written to {OUT.relative_to(REPO)}/")
+    print(f"Done. {total} files written:")
+    print(f"  • {OUT.relative_to(REPO)}/ ........... {stats['copied_docx'] + stats['copied_other'] + stats['pandoc_modified'] + stats['pandoc_generated']} policy files")
+    print(f"  • {OUT_GAP.relative_to(REPO)}/ ............................. {stats['gap_docx'] + stats['gap_xlsx']} gap-analysis files")
     print(f"  copied .docx originals:  {stats['copied_docx']}")
     print(f"  copied .xlsx/.pdf:       {stats['copied_other']}")
     print(f"  pandoc (modified .md):   {stats['pandoc_modified']}")

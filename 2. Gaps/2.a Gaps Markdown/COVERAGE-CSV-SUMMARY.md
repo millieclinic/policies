@@ -2,7 +2,7 @@
 
 This summary describes the row-by-row coverage matrix at `coverage_matrix.csv` in the same directory. The CSV is the authoritative per-row analysis; `SUMMARY.md` and `GAPS.md` remain useful for exec-readable structure.
 
-The matrix is generated against the 29-policy `3. final_policies/` set. The CSV's **Plain English** column is a layman's translation of each questionnaire item for non-security readers.
+The matrix is generated against the 29-policy `3. Final Word/3.a Final Markdown/` set. The CSV's **Plain English** column is a layman's translation of each questionnaire item for non-security readers.
 
 **Source CSV:** `ECH Security Assessment Questions - Sheet2.csv` (repo root) — the expanded 212-row × 16-column workbook supersedes the prior 182-row `Questions.csv`. New columns include `Additional Info Added` (col 7), which carries user-authoritative answers and overrides the AI-provided coverage where populated.
 

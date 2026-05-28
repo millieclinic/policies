@@ -1,26 +1,29 @@
 ---
 title: "Millie Policies"
-last_reviewed: 2026-05-26
+last_reviewed: 2026-05-28
 owner: "Privacy Officer + Security Officer (joint)"
 ---
 
 # Millie Policies
 
-This repository is the source of truth for Millie's HIPAA and information security policies. The current pass (May 2026) is structured as three numbered folders so the diff between the originals and the final policies is obvious:
+This repository is the source of truth for Millie's HIPAA and information security policies. Three numbered folders, each with a Word-friendly top level for non-technical reviewers and a Markdown sub-folder for the underlying source.
 
-| Folder | Purpose |
-|---|---|
-| **`1. original_docs_markdown/`** | The original Millie policies, converted from `.doc` / `.docx` / `.pdf` / `.xlsx` into Markdown **with no editorial changes**. This is the baseline. Don't edit. |
-| **`2. gaps_for_ech/`** | Section-by-section gap analysis against the ECH Security Assessment. Categorizes each section of every questionnaire as **No Gap**, **N/A** (doesn't need to live in a policy), or **Gaps** (real coverage gap; needs to be added to a policy). Minimal — does not enumerate every row. |
-| **`3. final_policies/`** | The final policy set. Starts as a copy of folder 1 and is edited from there: duplicate versions removed, files combined where natural, only ECH-required content added. `CHANGES.md` inside summarizes every structural move. |
+## What's where
 
-**Repo-layout supporting folders:**
+| Folder | What's in it (top level) | What's in the sub-folder |
+|---|---|---|
+| **`1. Original Docs (Word)/`** | The original Millie policies as `.doc` / `.docx` / `.pdf` / `.xlsx` files — exactly as authored. **Don't edit.** | `1.a Original Converted to MD/` — automatic Markdown conversions of the originals with no editorial changes. The baseline against which folder 3 is diffed. |
+| **`2. Gaps/`** | The ECH gap analysis as Word docs (`SUMMARY.docx`, `GAPS.docx`, `ROW-LEVEL-VERIFICATION.docx`, `NA-justifications.docx`, `COVERAGE-CSV-SUMMARY.docx`) plus the row-by-row matrix as Excel (`coverage_matrix.xlsx`). **Open in Word / Excel.** | `2.a Gaps Markdown/` — the editable Markdown / CSV source the Word/Excel files are generated from. |
+| **`3. Final Word/`** | The **final policy set** as Word / Excel / PDF — what an exec or reviewer should download. Starts as a copy of folder 1 and is edited from there: duplicate versions removed, files combined where natural, only ECH-required content added. **Don't edit these directly; regenerate via the build script.** | `3.a Final Markdown/` — the editable Markdown source for the final policies. This is what you actually edit when a policy changes; `CHANGES.md` inside summarizes every structural move vs the originals. |
 
-- **`Policy Docs/`** — the original `.doc` / `.docx` / `.pdf` / `.xlsx` source files. Don't edit; they're the immutable inputs that folder 1 was generated from.
-- **`policy_docs_word/`** — exec-facing bundle. For each file in folder 3: if the policy is unchanged from the original, this folder gets the *original* `.docx` (or `.xlsx` / `.pdf`) from `Policy Docs/` — perfect Word formatting preserved. For the 3 policies that have ECH-driven clauses appended, this folder gets a pandoc-converted `.docx` (readable Word doc; styling not identical to the original). `CHANGES.docx` is pandoc-converted from `3. final_policies/CHANGES.md`. Regenerate after any policy edit with `./scripts/build-word-docs.py`. Don't edit — your changes get overwritten on the next rebuild.
-- **`scripts/build-word-docs.py`** — the re-runnable build script (Python; uses pandoc for the converted files, plain copy for the unchanged ones). Auto-installs pandoc via Homebrew if missing.
-- **`ECH Security Assessment Questions - Questions.csv`** — the questionnaire that drives the gap analysis.
-- **`_old_attempt/`** — a previous consolidation pass that diverged too far from the originals (rewrote in a fresh template, broke Word formatting, added a lot of structure that ECH wasn't actually asking for). Preserved for reference; not authoritative.
+After editing anything in a Markdown sub-folder, run `./scripts/build-word-docs.py` to regenerate the Word/Excel files at the top level of folder 2 and folder 3.
+
+## Other repo contents
+
+- **`scripts/build-word-docs.py`** — the re-runnable build script. Auto-installs pandoc via Homebrew on first run.
+- **`ECH Security Assessment Questions - Questions.csv`** — the original 182-row ECH questionnaire (immutable input).
+- **`ECH Security Assessment Questions - Sheet2.csv`** — your expanded 212-row workbook with your own answers in the "Current Answer" and "Additional Info Added" columns; the gap analysis is generated from this.
+- **`_old_attempt/`** — a previous consolidation pass that diverged too far from the originals (rewrote in a fresh template, broke Word formatting, added a lot of structure that ECH wasn't actually asking for). Preserved for reference only; not authoritative.
 
 ## Working philosophy
 
@@ -30,6 +33,15 @@ This repository is the source of truth for Millie's HIPAA and information securi
 
 ## How to use this repo
 
-1. Treat `3. final_policies/` as authoritative for any policy question.
-2. To see *why* a policy looks the way it does, diff the same filename between folder 1 and folder 3, then read `3. final_policies/CHANGES.md`.
-3. When new ECH gaps are surfaced (next vendor questionnaire, new audit), update `2. gaps_for_ech/` first, then make the minimum edit to folder 3 needed to close them. Don't grow the policy count unless ECH forces it.
+**If you're a reviewer / exec:** open the Word files in `3. Final Word/` and the Word/Excel files in `2. Gaps/`. You can ignore everything else.
+
+**If you're maintaining the policies:**
+
+1. Treat `3. Final Word/3.a Final Markdown/` as the authoritative source for any policy edit.
+2. To see *why* a policy looks the way it does, diff the same filename between `1. Original Docs (Word)/1.a Original Converted to MD/` and `3. Final Word/3.a Final Markdown/`, then read the `CHANGES.md` next to the final markdown.
+3. When new ECH gaps are surfaced (next vendor questionnaire, new audit), update `2. Gaps/2.a Gaps Markdown/` first, then make the minimum edit to `3. Final Word/3.a Final Markdown/` needed to close them. Don't grow the policy count unless ECH forces it.
+4. After any edit, run `./scripts/build-word-docs.py` to regenerate the Word/Excel files. Commit the markdown changes and the regenerated Word output together.
+
+## Quick-start for execs
+
+Drag `2. Gaps/` and `3. Final Word/` into Google Drive — each `.docx` will open as a Google Doc, each `.xlsx` as a Google Sheet. Or just open the files directly in Word / Excel.

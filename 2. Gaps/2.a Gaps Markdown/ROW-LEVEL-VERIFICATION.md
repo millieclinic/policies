@@ -1,6 +1,6 @@
 # ECH Gap Analysis — Row-Level Verification
 
-Re-checked every row inside each previously-rated **No Gap** section (15 sections, ~75 rows) against the actual text of the 28 originals in `3. final_policies/`. The section-level pass was directionally right but coarse — it hid real row-level gaps in **SIG S (SCRM)**, **SIG K (Resilience)**, **SIG G (IT Ops / Change Mgmt)**, and **SIG J (Incident review methodology / evidence integrity)**. Findings below.
+Re-checked every row inside each previously-rated **No Gap** section (15 sections, ~75 rows) against the actual text of the 28 originals in `3. Final Word/3.a Final Markdown/`. The section-level pass was directionally right but coarse — it hid real row-level gaps in **SIG S (SCRM)**, **SIG K (Resilience)**, **SIG G (IT Ops / Change Mgmt)**, and **SIG J (Incident review methodology / evidence integrity)**. Findings below.
 
 ---
 
