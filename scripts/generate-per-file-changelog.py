@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """generate-per-file-changelog.py — produce a file-by-file changelog
-comparing every file in `3. Final Word/3.a Final Markdown/` to its
+comparing every file in `Current Policies (<date> Generated)/3.a Final Markdown/` to its
 original in `1. Original Docs (Word)/1.a Original Converted to MD/`.
 
 For each final file, classify as:
@@ -9,7 +9,7 @@ For each final file, classify as:
   - MERGED     (multiple sources combined; per-source provenance + new
                 content listed)
 
-Output: `3. Final Word/3.a Final Markdown/PER-FILE-CHANGELOG.md`
+Output: `Current Policies (<date> Generated)/3.a Final Markdown/PER-FILE-CHANGELOG.md`
 """
 
 from __future__ import annotations
@@ -19,7 +19,19 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
 F1 = REPO / "1. Original Docs (Word)" / "1.a Original Converted to MD"
-F3 = REPO / "3. Final Word" / "3.a Final Markdown"
+
+
+def _find_current_policies_folder() -> Path:
+    matches = sorted(REPO.glob("Current Policies (* Generated)"))
+    if not matches:
+        raise SystemExit(
+            "No `Current Policies (… Generated)/` folder found. "
+            "Run `scripts/build-word-docs.py` first."
+        )
+    return matches[-1]
+
+
+F3 = _find_current_policies_folder() / "3.a Final Markdown"
 
 # --- Known merges (kept in sync with restructure-final.py) -----------------
 ROMAN = ["", "I", "II", "III", "IV", "V"]
@@ -146,7 +158,7 @@ def main() -> None:
     out.append("# Per-File Changelog — Original → Final")
     out.append("")
     out.append(
-        "For every active file in `3. Final Word/3.a Final Markdown/`, this "
+        "For every active file in `Current Policies (<date> Generated)/3.a Final Markdown/`, this "
         "document shows exactly what changed from the original source(s) in "
         "`1. Original Docs (Word)/1.a Original Converted to MD/`. Walk it "
         "file-by-file to verify."
@@ -271,7 +283,7 @@ def main() -> None:
         "subsumed by a merge. They still exist in `1. Original Docs (Word)/1.a "
         "Original Converted to MD/` (and the underlying Word source still "
         "exists in `1. Original Docs (Word)/`) as historical reference; they "
-        "are simply not in `3. Final Word/3.a Final Markdown/`."
+        "are simply not in `Current Policies (<date> Generated)/3.a Final Markdown/`."
     )
     out.append("")
     for fname, reason in SUPERSEDED:

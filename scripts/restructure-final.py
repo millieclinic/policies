@@ -17,7 +17,19 @@ import subprocess
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
-ROOT = REPO / "3. Final Word" / "3.a Final Markdown"
+
+
+def _find_current_policies_folder() -> Path:
+    matches = sorted(REPO.glob("Current Policies (* Generated)"))
+    if not matches:
+        raise SystemExit(
+            "No `Current Policies (… Generated)/` folder found. "
+            "Run `scripts/build-word-docs.py` first."
+        )
+    return matches[-1]
+
+
+ROOT = _find_current_policies_folder() / "3.a Final Markdown"
 
 _ROMAN = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"]
 _LETTERS = "abcdefghijklmnopqrstuvwxyz"
@@ -379,7 +391,7 @@ def main() -> None:
     print("DONE")
     print("=" * 60)
     final = sorted(p.name for p in ROOT.glob("*.md"))
-    print(f"\n{len(final)} files now in 3. Final Word/3.a Final Markdown/:")
+    print(f"\n{len(final)} files now in Current Policies (<date> Generated)/3.a Final Markdown/:")
     for f in final:
         print(f"  {f}")
 

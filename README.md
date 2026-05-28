@@ -14,7 +14,7 @@ This repository is the source of truth for Millie's HIPAA and information securi
 |---|---|---|
 | **`1. Original Docs (Word)/`** | The original Millie policies as `.doc` / `.docx` / `.pdf` / `.xlsx` files — exactly as authored. **Don't edit.** | `1.a Original Converted to MD/` — automatic Markdown conversions of the originals with no editorial changes. The baseline against which folder 3 is diffed. |
 | **`2. Gaps/`** | The ECH gap analysis as Word docs (`SUMMARY.docx`, `GAPS.docx`, `ROW-LEVEL-VERIFICATION.docx`, `NA-justifications.docx`, `COVERAGE-CSV-SUMMARY.docx`) plus the row-by-row matrix as Excel (`coverage_matrix.xlsx`). **Open in Word / Excel.** | `2.a Gaps Markdown/` — the editable Markdown / CSV source the Word/Excel files are generated from. |
-| **`3. Final Word/`** | The **final policy set** as Word / Excel / PDF — what an exec or reviewer should download. Starts as a copy of folder 1 and is edited from there: duplicate versions removed, files combined where natural, only ECH-required content added. **Don't edit these directly; regenerate via the build script.** | `3.a Final Markdown/` — the editable Markdown source for the final policies. This is what you actually edit when a policy changes; `CHANGES.md` inside summarizes every structural move vs the originals. |
+| **`Current Policies (MM-DD-YYYY Generated)/`** | The **final policy set** as Word / Excel / PDF — what an exec or reviewer should download. Starts as a copy of folder 1 and is edited from there: duplicate versions removed, files combined where natural, only ECH-required content added. **Don't edit these directly; regenerate via the build script.** | `3.a Final Markdown/` — the editable Markdown source for the final policies. This is what you actually edit when a policy changes; `CHANGES.md` inside summarizes every structural move vs the originals. |
 
 After editing anything in a Markdown sub-folder, run `./scripts/build-word-docs.py` to regenerate the Word/Excel files at the top level of folder 2 and folder 3.
 
@@ -33,15 +33,15 @@ After editing anything in a Markdown sub-folder, run `./scripts/build-word-docs.
 
 ## How to use this repo
 
-**If you're a reviewer / exec:** open the Word files in `3. Final Word/` and the Word/Excel files in `2. Gaps/`. You can ignore everything else.
+**If you're a reviewer / exec:** open the Word files in `Current Policies (MM-DD-YYYY Generated)/` and the Word/Excel files in `2. Gaps/`. You can ignore everything else.
 
 **If you're maintaining the policies:**
 
-1. Treat `3. Final Word/3.a Final Markdown/` as the authoritative source for any policy edit.
-2. To see *why* a policy looks the way it does, diff the same filename between `1. Original Docs (Word)/1.a Original Converted to MD/` and `3. Final Word/3.a Final Markdown/`, then read the `CHANGES.md` next to the final markdown.
-3. When new ECH gaps are surfaced (next vendor questionnaire, new audit), update `2. Gaps/2.a Gaps Markdown/` first, then make the minimum edit to `3. Final Word/3.a Final Markdown/` needed to close them. Don't grow the policy count unless ECH forces it.
+1. Treat `Current Policies (MM-DD-YYYY Generated)/3.a Final Markdown/` as the authoritative source for any policy edit.
+2. To see *why* a policy looks the way it does, diff the same filename between `1. Original Docs (Word)/1.a Original Converted to MD/` and `Current Policies (MM-DD-YYYY Generated)/3.a Final Markdown/`, then read the `CHANGES.md` next to the final markdown.
+3. When new ECH gaps are surfaced (next vendor questionnaire, new audit), update `2. Gaps/2.a Gaps Markdown/` first, then make the minimum edit to `Current Policies (MM-DD-YYYY Generated)/3.a Final Markdown/` needed to close them. Don't grow the policy count unless ECH forces it.
 4. After any edit, run `./scripts/build-word-docs.py` to regenerate the Word/Excel files. Commit the markdown changes and the regenerated Word output together.
 
 ## Quick-start for execs
 
-Drag `2. Gaps/` and `3. Final Word/` into Google Drive — each `.docx` will open as a Google Doc, each `.xlsx` as a Google Sheet. Or just open the files directly in Word / Excel.
+Drag `2. Gaps/` and `Current Policies (MM-DD-YYYY Generated)/` into Google Drive — each `.docx` will open as a Google Doc, each `.xlsx` as a Google Sheet. Or just open the files directly in Word / Excel.

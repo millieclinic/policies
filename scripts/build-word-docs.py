@@ -29,13 +29,53 @@ import sys
 import tempfile
 from pathlib import Path
 
+import datetime
+
 REPO = Path(__file__).resolve().parent.parent
 POLICY_DOCS = REPO / "1. Original Docs (Word)"
 FOLDER_1 = POLICY_DOCS / "1.a Original Converted to MD"
 FOLDER_2 = REPO / "2. Gaps" / "2.a Gaps Markdown"
 OUT_GAP = REPO / "2. Gaps"
-OUT = REPO / "3. Final Word"
+
+# The "current policies" folder embeds today's generation date in its name so
+# users can tell at a glance how fresh the bundle is when downloading.
+_TODAY_STR = datetime.date.today().strftime("%m-%d-%Y")
+_CURRENT_POLICIES_NAME = f"Current Policies ({_TODAY_STR} Generated)"
+OUT = REPO / _CURRENT_POLICIES_NAME
+# The inner markdown folder lives inside whatever OUT is named today.
 FOLDER_3 = OUT / "3.a Final Markdown"
+
+
+def _refresh_current_policies_folder_name() -> None:
+    """If an older `Current Policies (date Generated)/` folder exists with a
+    different date, rename it to today's date via `git mv` so per-file history
+    is preserved. Runs at the top of `main()` before any reads/writes."""
+    import subprocess
+
+    existing = sorted(REPO.glob("Current Policies (* Generated)"))
+    # Filter to the ones that are not already today's name
+    stale = [p for p in existing if p.name != _CURRENT_POLICIES_NAME and p.is_dir()]
+    if not stale:
+        return
+    # If there are multiple stale folders, something is wrong — leave them alone
+    if len(stale) > 1:
+        print(
+            f"WARNING: Found {len(stale)} stale 'Current Policies (…)' folders; "
+            f"skipping auto-rename:",
+        )
+        for p in stale:
+            print(f"  - {p.name}")
+        return
+    old = stale[0]
+    rel_old = old.name
+    rel_new = _CURRENT_POLICIES_NAME
+    res = subprocess.run(
+        ["git", "mv", rel_old, rel_new], cwd=REPO, capture_output=True, text=True
+    )
+    if res.returncode != 0:
+        # Fallback to plain rename if git isn't available
+        old.rename(REPO / rel_new)
+    print(f"Renamed folder: {rel_old}  →  {rel_new}")
 
 
 def ensure_pandoc() -> None:
@@ -210,6 +250,9 @@ def pandoc_to_docx(src_md: Path, dst_docx: Path) -> None:
 
 def main() -> None:
     ensure_pandoc()
+
+    # Bump the date in the "Current Policies (… Generated)" folder name if stale
+    _refresh_current_policies_folder_name()
 
     if not FOLDER_3.exists():
         print(f"ERROR: {FOLDER_3} not found.", file=sys.stderr)

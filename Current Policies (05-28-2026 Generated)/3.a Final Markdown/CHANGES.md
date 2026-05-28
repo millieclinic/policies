@@ -1,6 +1,6 @@
 # Changes — Final Markdown vs Original Converted Markdown
 
-`3. Final Word/3.a Final Markdown/` started as an exact copy of `1. Original Docs (Word)/1.a Original Converted to MD/` (37 files, no edits). This document is the **comprehensive log of every change applied on top**: deletions, content additions, file merges, and renames. The full diff is visible per-file in git history; this is the executive-readable summary.
+`Current Policies (<date> Generated)/3.a Final Markdown/` started as an exact copy of `1. Original Docs (Word)/1.a Original Converted to MD/` (37 files, no edits). This document is the **comprehensive log of every change applied on top**: deletions, content additions, file merges, and renames. The full diff is visible per-file in git history; this is the executive-readable summary.
 
 **Net change: 37 → 19 active policy files** (+ `CHANGES.md` = 20 files in the folder).
 - 9 superseded duplicate files removed (§1)
@@ -177,5 +177,5 @@ CHANGES.md                                       (this file)
 1. **When ECH changes** (new vendor questionnaire, regulator update): start in `2. Gaps/2.a Gaps Markdown/`. Re-evaluate the row-level coverage matrix. Default to N/A unless ECH explicitly asks for new policy text.
 2. **When a real gap appears**: append the smallest possible clause to an *existing* file here. Don't create a new file unless the gap is genuinely orthogonal to every existing policy.
 3. **When a policy is materially revised**: edit the file here directly. The diff against `1. Original Docs (Word)/1.a Original Converted to MD/` shows total drift from the original; the per-file git history shows what changed when.
-4. **After any edit**, run `./scripts/build-word-docs.py` to regenerate `3. Final Word/*.docx` and `2. Gaps/*.docx` / `*.xlsx`.
+4. **After any edit**, run `./scripts/build-word-docs.py` to regenerate `Current Policies (<date> Generated)/*.docx` and `2. Gaps/*.docx` / `*.xlsx`.
 5. **Quarterly / annual review burden** is sized by file count. Keep this folder lean. 19 files today.
