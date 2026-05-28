@@ -33,7 +33,9 @@ REPO = Path(__file__).resolve().parent.parent
 POLICY_DOCS = REPO / "Policy Docs"
 FOLDER_1 = REPO / "1. original_docs_markdown"
 FOLDER_3 = REPO / "3. final_policies"
+FOLDER_2 = REPO / "2. gaps_for_ech"
 OUT = REPO / "policy_docs_word"
+OUT_GAP = OUT / "gap_analysis"
 
 
 def ensure_pandoc() -> None:
@@ -122,8 +124,12 @@ def main() -> None:
         sys.exit(1)
 
     OUT.mkdir(exist_ok=True)
+    OUT_GAP.mkdir(exist_ok=True)
     # Clean rebuild — remove anything we previously wrote
     for f in OUT.iterdir():
+        if f.is_file():
+            f.unlink()
+    for f in OUT_GAP.iterdir():
         if f.is_file():
             f.unlink()
 
@@ -132,6 +138,8 @@ def main() -> None:
         "copied_other": 0,
         "pandoc_modified": 0,
         "pandoc_generated": 0,
+        "gap_docx": 0,
+        "gap_xlsx": 0,
     }
 
     for md_file in sorted(FOLDER_3.glob("*.md")):
@@ -167,6 +175,63 @@ def main() -> None:
             stats["pandoc_modified"] += 1
             print(f"  [pandoc, modified]   {dst.name}")
 
+    # ---------- Gap analysis bundle ----------
+    # Convert the markdown gap docs to .docx and the coverage CSV to a formatted .xlsx
+    # so an exec can review the analysis alongside the policies.
+    if FOLDER_2.exists():
+        print()
+        print("Gap analysis:")
+        for md_file in sorted(FOLDER_2.glob("*.md")):
+            dst = OUT_GAP / f"{md_file.stem}.docx"
+            pandoc_to_docx(md_file, dst)
+            stats["gap_docx"] += 1
+            print(f"  [pandoc]   gap_analysis/{dst.name}")
+        for csv_file in sorted(FOLDER_2.glob("*.csv")):
+            dst = OUT_GAP / f"{csv_file.stem}.xlsx"
+            try:
+                import csv as _csv
+                from openpyxl import Workbook
+                from openpyxl.styles import Alignment, Font, PatternFill
+                from openpyxl.utils import get_column_letter
+
+                wb = Workbook()
+                ws = wb.active
+                ws.title = "Coverage Matrix"
+                with open(csv_file, newline="", encoding="utf-8") as f:
+                    rows = list(_csv.reader(f))
+                for row in rows:
+                    ws.append(row)
+                # Header styling
+                header_font = Font(bold=True, color="FFFFFF")
+                header_fill = PatternFill("solid", fgColor="305496")
+                for cell in ws[1]:
+                    cell.font = header_font
+                    cell.fill = header_fill
+                    cell.alignment = Alignment(horizontal="left", vertical="top", wrap_text=True)
+                # Column widths — generous for text-heavy columns, narrower for short ones
+                widths = {
+                    "A": 18, "B": 28, "C": 8, "D": 50, "E": 36,
+                    "F": 22, "G": 36, "H": 16, "I": 18, "J": 50,
+                    "K": 36, "L": 12, "M": 36, "N": 30, "O": 50, "P": 10,
+                }
+                for col_letter, w in widths.items():
+                    ws.column_dimensions[col_letter].width = w
+                # Wrap text + top-align all data cells
+                wrap_align = Alignment(wrap_text=True, vertical="top")
+                for row in ws.iter_rows(min_row=2):
+                    for cell in row:
+                        cell.alignment = wrap_align
+                # Freeze the header row
+                ws.freeze_panes = "A2"
+                wb.save(dst)
+                stats["gap_xlsx"] += 1
+                print(f"  [xlsx]     gap_analysis/{dst.name}")
+            except Exception as e:
+                # Fallback: plain copy of the CSV
+                shutil.copy2(csv_file, OUT_GAP / csv_file.name)
+                stats["gap_xlsx"] += 1
+                print(f"  [copy csv (xlsx failed: {e})] gap_analysis/{csv_file.name}")
+
     total = sum(stats.values())
     print()
     print(f"Done. {total} files written to {OUT.relative_to(REPO)}/")
@@ -174,6 +239,8 @@ def main() -> None:
     print(f"  copied .xlsx/.pdf:       {stats['copied_other']}")
     print(f"  pandoc (modified .md):   {stats['pandoc_modified']}")
     print(f"  pandoc (generated .md):  {stats['pandoc_generated']}")
+    print(f"  gap-analysis .docx:      {stats['gap_docx']}")
+    print(f"  gap-analysis .xlsx:      {stats['gap_xlsx']}")
     print()
     print("Share with execs:")
     print("  • Word — open .docx files directly")
