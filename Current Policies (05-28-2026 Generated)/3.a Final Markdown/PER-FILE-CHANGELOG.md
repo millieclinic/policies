@@ -67,7 +67,7 @@ Millie uses Google Workspace's built-in anti-malware and email filtering with no
 
 **Type:** Renamed only — content byte-identical to original.
 
-**Source:** `Millie Privacy Policy.md`
+**Source:** `Millie Privacy Policy (1).md`
 
 **Changes:** filename only.
 
@@ -262,33 +262,11 @@ Millie uses Google Workspace's built-in anti-malware and email filtering with no
 ---
 
 
-## 07a. Platform & Subscription Matrix.md
-
-**Type:** Renamed only — content byte-identical to original.
-
-**Source:** `Millie Matrix of Platforms, Software Subscriptions, and Access (1).md`
-
-**Changes:** filename only.
-
----
-
-
 ## 07b. Insurance Authorization Form Template.md
 
 **Type:** Renamed only — content byte-identical to original.
 
 **Source:** `03u HIPAA - TEMPLATE - Insurance Authorization and Assignment of Benefits (002).md`
-
-**Changes:** filename only.
-
----
-
-
-## 07c. ECH Security Assessment Snapshot.md
-
-**Type:** Renamed only — content byte-identical to original.
-
-**Source:** `ECH Security Assessment Questions (1).md`
 
 **Changes:** filename only.
 

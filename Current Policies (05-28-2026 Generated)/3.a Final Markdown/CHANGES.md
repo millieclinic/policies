@@ -172,6 +172,30 @@ CHANGES.md                                       (this file)
 
 ---
 
+## 8. Later cleanup (2026-05-28 — after user reorg)
+
+The user reorganized the repo (added `UCSF Docs/`, `ECH Security Docs/`, `Supporting Sources/` top-level folders; deleted duplicate sources from `1. Original Docs (Word)/`). Three follow-on corrections landed in `3. Final Word/` / `Current Policies (… Generated)/`:
+
+- **`07a. Platform & Subscription Matrix.xlsx` and `07c. ECH Security Assessment Snapshot.xlsx` removed.** Neither is a policy. The platform matrix's canonical home is now `Supporting Sources/Millie Matrix of Platforms, Software Subscriptions, and Access (1).xlsx`; the ECH snapshot is replaced by the live `ECH Security Docs/ECH Security Assessment Questions - Sheet2.csv`. The corresponding `.md` files were removed from `3.a Final Markdown/` as well. The "07. Reference" category now contains only `07b. Insurance Authorization Form Template`.
+- **`06b. SDLC & Asset Lifecycle Policy` switched format from `.pdf` to `.docx`.** The user added a `.docx` version of the SDLC source to `1. Original Docs (Word)/` and deleted the original `.pdf`. The build script's `find_source_by_content()` picks up the `.docx` automatically, so the exec-facing file is now a Word document.
+- **9 orphaned `.md` files removed from `1.a Original Converted to MD/`** — these were the Markdown conversions of source files the user deleted from `1. Original Docs (Word)/` (older `03d` / `03q` / `03s` ×3 / `03w` / Framework / Privacy Policy / Platform Matrix / ECH Questions). Folder 1 and its `1.a` sub-folder are now in 1:1 parity (28 source files ↔ 28 Markdown conversions).
+
+Active policy count in `3.a Final Markdown/` after this pass: **17 active policies** + `CHANGES.md` + `PER-FILE-CHANGELOG.md`.
+
+Revised category-prefix inventory:
+
+| Prefix | Category | Count |
+|---|---|---|
+| `01.` | Foundational & Governance | 4 |
+| `02.` | Privacy & Patient Rights | 3 |
+| `03.` | Technical Safeguards | 1 |
+| `04.` | Operations & Continuity | 4 |
+| `05.` | Incident & Breach Response | 1 |
+| `06.` | Vendor & Software | 3 |
+| `07.` | Reference | 1 (just `07b. Insurance Authorization Form Template`) |
+
+---
+
 ## 7. How to maintain this folder
 
 1. **When ECH changes** (new vendor questionnaire, regulator update): start in `2. Gaps/2.a Gaps Markdown/`. Re-evaluate the row-level coverage matrix. Default to N/A unless ECH explicitly asks for new policy text.

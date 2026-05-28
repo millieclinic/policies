@@ -271,10 +271,10 @@ RENAMES = [
     ("03c HIPAA - Business Associate Agreement Policy.md", "06a. Business Associate Agreement Policy.md"),
     ("System Development Life Cycle (SDLC) & Asset Lifecycle Policy.md", "06b. SDLC & Asset Lifecycle Policy.md"),
     ("HIPAA - Millie_BAA (for BA Use with Subcontractor).md", "06c. BAA Template (Subcontractor).md"),
-    # 07. Reference
-    ("Millie Matrix of Platforms, Software Subscriptions, and Access (1).md", "07a. Platform & Subscription Matrix.md"),
+    # 07. Reference — 07a (Platform Matrix) and 07c (ECH Snapshot) were
+    # removed 2026-05-28 because they aren't policies; their canonical homes
+    # are now in Supporting Sources/ and ECH Security Docs/ respectively.
     ("03u HIPAA - TEMPLATE - Insurance Authorization and Assignment of Benefits (002).md", "07b. Insurance Authorization Form Template.md"),
-    ("ECH Security Assessment Questions (1).md", "07c. ECH Security Assessment Snapshot.md"),
 ]
 
 
