@@ -2,20 +2,20 @@
 
 This summary describes the row-by-row coverage matrix at `coverage_matrix.csv` in the same directory. The CSV is the authoritative per-row analysis; `SUMMARY.md` and `GAPS.md` remain useful for exec-readable structure.
 
-The matrix is generated against the 29-policy `3. Final Word/3.a Final Markdown/` set. The CSV's **Plain English** column is a layman's translation of each questionnaire item for non-security readers.
+The matrix is generated against the 17-policy `Current Policies (… Generated)/3.a Final Markdown/` set (post-consolidation). The CSV's **Plain English** column is a layman's translation of each questionnaire item for non-security readers.
 
-**Source CSV:** `ECH Security Assessment Questions - Sheet2.csv` (repo root) — the expanded 212-row × 16-column workbook supersedes the prior 182-row `Questions.csv`. New columns include `Additional Info Added` (col 7), which carries user-authoritative answers and overrides the AI-provided coverage where populated.
+**Source CSV:** `ECH Security Docs/ECH Security Assessment Questions - Sheet2.csv` — the user-maintained authoritative workbook. The user populates `Current Answer`, `Additional Info Added`, and `Flags/Notes` as new info arrives, and may add new questions / sections. Re-sync into `coverage_matrix.csv` via `python3 scripts/sync-ech-sheet2.py`.
 
-**Total rows:** 212 (expected 212; previously 182)
+**Total rows:** 217 (was 212; +5 user-added rows in the latest sync — see "Recent sync" below).
 
 ## Coverage counts
 
 | Coverage | Count |
 |---|---|
-| Full | 120 |
-| Partial | 38 |
+| Full | 121 |
+| Partial | 40 |
 | None | 0 |
-| N/A | 50 |
+| N/A | 52 |
 | Evidence-only | 4 |
 
 ## Flag Risk counts
@@ -23,9 +23,23 @@ The matrix is generated against the 29-policy `3. Final Word/3.a Final Markdown/
 | Flag Risk | Count |
 |---|---|
 | High | 19 |
-| Medium | 23 |
-| Low | 120 |
-| None | 50 |
+| Medium | 25 |
+| Low | 121 |
+| None | 52 |
+
+## Recent sync (2026-05-28)
+
+Pulled in user changes from Sheet2:
+
+- **5 net-new rows** added by the user, all in SIG Lite 2025:
+  - T.1 — Vulnerability Management Program Policy (Partial → recommends a one-paragraph addition to `01c. Risk Management Policy`)
+  - T.2 — Cybersecurity supply-chain risk management (Partial → same C-SCRM addition already proposed for SIG S.32 closes this)
+  - U.1 — Servers used for scoped data (Full — Millie has no on-prem servers; cloud-only)
+  - V.1 — Cloud hosting services provided (N/A — Millie does not provide cloud hosting)
+  - V.2 — Cloud hosting provider audit reports (N/A — follows from V.1)
+- **14 rows** had their Proposed Answer regenerated because the user added new `Current Answer` or `Additional Info Added` content (notably A04/A06 OWASP rows with BreachLock + patch-system details, and Encryption row with "We don't use EC2").
+- **12 rows** had user-input changes that didn't require a Proposed Answer rewrite (the user's content was already implied by the existing answer).
+- **186 rows** carried over unchanged from the prior sync.
 
 ## Required Fix totals
 
