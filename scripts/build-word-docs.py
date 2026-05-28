@@ -60,6 +60,79 @@ def find_source(stem: str) -> Path | None:
     return None
 
 
+_ROMAN = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"]
+_LETTERS = "abcdefghijklmnopqrstuvwxyz"
+
+
+def rebuild_heading_hierarchy(text: str) -> str:
+    """Restore the heading hierarchy that markitdown flattened into a numbered list.
+
+    Some Millie policies came out of markitdown as a flat numbered list:
+
+        1. **Scope**
+        [paragraph]
+        1. **Policy**
+        2. It is Company's policy...
+        3. This Policy applies...
+        4. **Procedure**
+        5. *Physical Safeguards*.
+        6. Users must always lock...
+
+    The original .docx had I/II/III headings, a/b/c sub-headings, and
+    i/ii/iii items. Pandoc renders the flat list literally and loses all
+    structure. This pre-pass detects the heading-like numbered items and
+    converts them back to proper markdown headings so pandoc produces
+    Word Heading 1 / Heading 2 styles.
+
+    Patterns:
+      "<num>. **Section**"        -> "## I. Section"   (Roman, h2_counter)
+      "<num>. *Subsection*[.]"    -> "### a. Subsection" (letter, h3 per section)
+      "<num>. <body text>"        -> "- <body text>"   (bullet under nearest heading)
+    """
+    lines = text.split("\n")
+
+    # Only apply when the flat pattern is actually present — Framework-style
+    # files that already use `# 1. Overview` markdown headings should pass through
+    # unchanged.
+    if not any(
+        re.match(r"^\d+\. \*\*[^*]+\*\*\s*$", ln) for ln in lines
+    ):
+        return text
+
+    out: list[str] = []
+    h2_counter = 0
+    h3_counter = 0
+    for line in lines:
+        # Top-level section heading: "1. **Scope**"
+        m = re.match(r"^\d+\. \*\*([^*]+)\*\*\s*$", line)
+        if m:
+            h2_counter += 1
+            h3_counter = 0
+            num = _ROMAN[h2_counter] if h2_counter < len(_ROMAN) else str(h2_counter)
+            out.append(f"## {num}. {m.group(1).strip()}")
+            continue
+        # Sub-heading: "5. *Physical Safeguards*."
+        m = re.match(r"^\d+\. \*([^*]+)\*\.?\s*$", line)
+        if m:
+            h3_counter += 1
+            letter = (
+                _LETTERS[h3_counter - 1]
+                if h3_counter - 1 < len(_LETTERS)
+                else str(h3_counter)
+            )
+            out.append(f"### {letter}. {m.group(1).strip()}")
+            continue
+        # Numbered body item that follows a heading — render as bullet so it
+        # nests visually under the heading rather than starting a new numbered
+        # list at "1." (pandoc default).
+        m = re.match(r"^\d+\. (.+)$", line)
+        if m and h2_counter > 0:
+            out.append(f"- {m.group(1).strip()}")
+            continue
+        out.append(line)
+    return "\n".join(out)
+
+
 def preprocess_md(src: Path) -> Path:
     """Strip docx→md conversion artifacts so pandoc → .docx renders cleanly."""
     text = src.read_text(encoding="utf-8")
@@ -86,6 +159,9 @@ def preprocess_md(src: Path) -> Path:
 
     # Fix the very common docx→md typo ("Companypersonnel" missing a space)
     text = text.replace("Companypersonnel", "Company personnel")
+
+    # Restore I/II/III heading hierarchy that markitdown flattened
+    text = rebuild_heading_hierarchy(text)
 
     tmp = tempfile.NamedTemporaryFile(
         mode="w", suffix=".md", delete=False, encoding="utf-8"
